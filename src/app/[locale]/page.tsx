@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Euro } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarDays,
+  Clock,
+  Euro,
+  MessageCircle,
+} from "lucide-react";
 import { BookingForm } from "@/components/BookingForm";
 import { GalleryGrid } from "@/components/GalleryGrid";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeading } from "@/components/SectionHeading";
 import {
+  areaImages,
   contact,
   copy,
   galleryImages,
@@ -49,6 +56,8 @@ export default async function LocaleHome({ params }: PageProps) {
   const t = copy[locale];
   const homeGridImages = homeGalleryImages.slice(0, 4);
   const homeFeatureImages = homeGalleryImages.slice(4, 6);
+  const areaGraphicImages = [areaImages[0], areaImages[2], areaImages[10]];
+  const contactPromptIcons = [CalendarDays, Clock, MessageCircle];
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
@@ -169,11 +178,42 @@ export default async function LocaleHome({ params }: PageProps) {
 
       <section className="section-band bg-cream px-5 py-20 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <SectionHeading
-            eyebrow={t.sections.areaEyebrow}
-            title={t.sections.areaTitle}
-            text={t.sections.areaText}
-          />
+          <div className="grid items-center gap-10 lg:grid-cols-[0.92fr_0.58fr]">
+            <SectionHeading
+              eyebrow={t.sections.areaEyebrow}
+              title={t.sections.areaTitle}
+              text={t.sections.areaText}
+            />
+            <div
+              className="relative min-h-[15rem] overflow-hidden sm:min-h-[17rem] lg:min-h-[20rem]"
+              aria-hidden="true"
+            >
+              <span className="shape-pool right-4 top-4 h-20 w-20 opacity-45 sm:right-10 sm:h-28 sm:w-28" />
+              <span className="shape-citrus bottom-16 left-16 h-16 w-16 opacity-55 sm:left-24 sm:h-24 sm:w-24" />
+              {areaGraphicImages.map((image, index) => {
+                const placement = [
+                  "left-4 top-6 h-32 w-32 sm:h-40 sm:w-40 lg:left-0 lg:h-44 lg:w-44",
+                  "right-2 top-0 h-40 w-40 sm:right-8 sm:h-52 sm:w-52 lg:right-4 lg:h-60 lg:w-60",
+                  "bottom-2 left-[38%] h-28 w-28 sm:h-36 sm:w-36 lg:h-40 lg:w-40",
+                ][index];
+
+                return (
+                  <div
+                    key={image.src}
+                    className={`absolute ${placement} overflow-hidden rounded-full border-[7px] border-cream shadow-[0_20px_54px_rgba(85,107,47,0.16)]`}
+                  >
+                    <Image
+                      src={image.src}
+                      alt=""
+                      width={520}
+                      height={520}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {t.attractions.map((item) => {
               const Icon = item.icon;
@@ -228,7 +268,8 @@ export default async function LocaleHome({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="bg-background px-5 py-20 lg:px-8">
+      <section className="section-band bg-background px-5 py-20 lg:px-8">
+        <span className="shape-sun right-10 top-16 h-28 w-28" />
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
             <SectionHeading
@@ -236,30 +277,38 @@ export default async function LocaleHome({ params }: PageProps) {
               title={t.sections.detailsTitle}
               text={t.sections.detailsText}
             />
-            <Link
-              href={localizedPath(locale, "/contact")}
-              className="cta-secondary mt-8"
-            >
-              {t.sections.contactTitle}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            {t.stayDetails.map((detail) => {
-              const Icon = detail.icon;
+            {t.contactPrompts.map((prompt, index) => {
+              const Icon = contactPromptIcons[index];
               return (
                 <div
-                  key={detail.title}
+                  key={prompt.title}
                   className="rounded-[1.7rem] border border-border bg-cream p-6"
                 >
-                  <Icon className="h-7 w-7 text-pool-deep" aria-hidden="true" />
-                  <h3 className="mt-5 text-xl font-black">{detail.title}</h3>
+                  <Icon className="h-7 w-7 text-citrus" aria-hidden="true" />
+                  <h3 className="mt-5 text-xl font-black">{prompt.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-muted">
-                    {detail.text}
+                    {prompt.text}
                   </p>
                 </div>
               );
             })}
+            <div className="organic-card flex flex-col justify-between rounded-[1.7rem] p-6">
+              <div>
+                <p className="text-sm font-black uppercase tracking-[0.22em] text-citrus">
+                  {t.sections.contactEyebrow}
+                </p>
+                <h3 className="mt-3 text-xl font-black">{t.common.contact}</h3>
+              </div>
+              <Link
+                href={localizedPath(locale, "/contact")}
+                className="cta-secondary mt-6"
+              >
+                {t.sections.contactTitle}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

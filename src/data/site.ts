@@ -72,6 +72,10 @@ export type PageCopy = {
     submit: string;
     demo: string;
   };
+  contactPrompts: Array<{
+    title: string;
+    text: string;
+  }>;
   galleryFilters: Record<GalleryCategory | "all", string>;
   stats: Array<{ value: string; label: string }>;
   amenities: Array<{
@@ -437,10 +441,10 @@ export const copy: Record<Locale, PageCopy> = {
       contactTitle: "Ask us anything",
       contactText:
         "Questions about dates, longer stays, accessibility, arrival times or the future handover? Send a note.",
-      detailsEyebrow: "Details",
-      detailsTitle: "Built for real holiday decisions",
+      detailsEyebrow: "Still deciding?",
+      detailsTitle: "Ask a quick question before you book",
       detailsText:
-        "The design keeps joyful summer energy, while the information stays practical and clear.",
+        "If you are checking dates, arrival plans or a longer stay, send us the details and we will help you choose the next step.",
     },
     booking: {
       title: "Start a booking",
@@ -455,6 +459,20 @@ export const copy: Record<Locale, PageCopy> = {
       submit: "Continue to deposit",
       demo: "Demo mode: add Supabase and Stripe environment variables to activate live deposits.",
     },
+    contactPrompts: [
+      {
+        title: "Dates and availability",
+        text: "Tell us your ideal arrival window and how flexible you are.",
+      },
+      {
+        title: "Arrival details",
+        text: "Ask about check-in, airport timing or getting settled after a late flight.",
+      },
+      {
+        title: "Longer stays",
+        text: "Share the length of stay you have in mind and what would make it comfortable.",
+      },
+    ],
     galleryFilters: {
       all: "All",
       pool: "Pool",
@@ -526,10 +544,10 @@ export const copy: Record<Locale, PageCopy> = {
       contactTitle: "Vraag ons alles",
       contactText:
         "Vragen over data, langere verblijven, toegankelijkheid, aankomsttijden of de toekomstige overdracht? Stuur gerust een bericht.",
-      detailsEyebrow: "Details",
-      detailsTitle: "Gemaakt voor echte vakantievragen",
+      detailsEyebrow: "Twijfel je nog?",
+      detailsTitle: "Stel een korte vraag voor je boekt",
       detailsText:
-        "Het ontwerp houdt de zonnige zomersfeer vast, terwijl de informatie praktisch en duidelijk blijft.",
+        "Controleer je data, aankomstplannen of een langer verblijf? Stuur de details door en we helpen je met de volgende stap.",
     },
     booking: {
       title: "Start je boeking",
@@ -544,6 +562,20 @@ export const copy: Record<Locale, PageCopy> = {
       submit: "Ga naar aanbetaling",
       demo: "Demomodus: voeg Supabase- en Stripe-omgevingsvariabelen toe voor live betalingen.",
     },
+    contactPrompts: [
+      {
+        title: "Data en beschikbaarheid",
+        text: "Vertel ons je ideale aankomstperiode en hoe flexibel je bent.",
+      },
+      {
+        title: "Aankomstdetails",
+        text: "Vraag naar inchecken, timing vanaf de luchthaven of aankomen na een late vlucht.",
+      },
+      {
+        title: "Langere verblijven",
+        text: "Deel hoe lang je wilt blijven en wat het verblijf comfortabel maakt.",
+      },
+    ],
     galleryFilters: {
       all: "Alles",
       pool: "Zwembad",
@@ -697,10 +729,10 @@ export const copy: Record<Locale, PageCopy> = {
       contactTitle: "Preguntanos lo que quieras",
       contactText:
         "Preguntas sobre fechas, estancias largas, accesibilidad, horarios de llegada o el futuro traspaso? Envia un mensaje.",
-      detailsEyebrow: "Detalles",
-      detailsTitle: "Pensada para decidir vacaciones reales",
+      detailsEyebrow: "Aun tienes dudas?",
+      detailsTitle: "Haz una pregunta antes de reservar",
       detailsText:
-        "El diseno mantiene una energia alegre de verano, mientras la informacion sigue siendo practica y clara.",
+        "Si quieres consultar fechas, planes de llegada o una estancia mas larga, envia los detalles y te ayudamos con el siguiente paso.",
     },
     booking: {
       title: "Iniciar reserva",
@@ -715,6 +747,20 @@ export const copy: Record<Locale, PageCopy> = {
       submit: "Continuar al deposito",
       demo: "Modo demo: anade variables de entorno de Supabase y Stripe para activar depositos reales.",
     },
+    contactPrompts: [
+      {
+        title: "Fechas y disponibilidad",
+        text: "Cuentanos tu ventana ideal de llegada y cuanta flexibilidad tienes.",
+      },
+      {
+        title: "Detalles de llegada",
+        text: "Pregunta por el check-in, los tiempos desde el aeropuerto o una llegada tarde.",
+      },
+      {
+        title: "Estancias largas",
+        text: "Comparte la duracion que tienes en mente y que haria comoda la estancia.",
+      },
+    ],
     galleryFilters: {
       all: "Todo",
       pool: "Piscina",
