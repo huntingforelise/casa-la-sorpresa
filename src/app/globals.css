@@ -1,26 +1,160 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff8e8;
+  --foreground: #243128;
+  --sun: #ffd34e;
+  --sun-strong: #f6a21a;
+  --citrus: #f1732d;
+  --coral: #e85f4d;
+  --pool: #38b8c7;
+  --pool-deep: #0f6f7c;
+  --olive: #556b2f;
+  --cream: #fffdf4;
+  --sand: #f8e6bd;
+  --terracotta: #b9512f;
+  --border: rgb(36 49 40 / 0.14);
+  --muted: rgb(36 49 40 / 0.72);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-sun: var(--sun);
+  --color-sun-strong: var(--sun-strong);
+  --color-citrus: var(--citrus);
+  --color-coral: var(--coral);
+  --color-pool: var(--pool);
+  --color-pool-deep: var(--pool-deep);
+  --color-olive: var(--olive);
+  --color-cream: var(--cream);
+  --color-sand: var(--sand);
+  --color-terracotta: var(--terracotta);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--sun);
+  color: var(--foreground);
+}
+
+.sunny-shell {
+  background:
+    radial-gradient(circle at 8% 6%, rgb(255 211 78 / 0.5) 0 8rem, transparent 8.2rem),
+    radial-gradient(circle at 94% 20%, rgb(56 184 199 / 0.22) 0 11rem, transparent 11.2rem),
+    linear-gradient(180deg, #fff8e8 0%, #fffdf4 48%, #fff3d2 100%);
+}
+
+.section-band {
+  position: relative;
+  overflow: hidden;
+}
+
+.shape-sun,
+.shape-citrus,
+.shape-pool {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 9999px;
+  opacity: 0.8;
+}
+
+.shape-sun {
+  background: var(--sun);
+  box-shadow: 0 18px 50px rgb(246 162 26 / 0.22);
+}
+
+.shape-citrus {
+  background: color-mix(in srgb, var(--citrus) 82%, white);
+}
+
+.shape-pool {
+  background: color-mix(in srgb, var(--pool) 72%, white);
+}
+
+.arch-mask {
+  border-radius: 999px 999px 28px 28px;
+}
+
+.organic-card {
+  border: 1px solid var(--border);
+  background: rgb(255 253 244 / 0.78);
+  box-shadow: 0 24px 70px rgb(85 107 47 / 0.12);
+  backdrop-filter: blur(14px);
+}
+
+.cta-primary {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background: var(--citrus);
+  padding: 0.8rem 1.25rem;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #fffdf4;
+  box-shadow: 0 16px 34px rgb(241 115 45 / 0.26);
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.cta-primary:hover {
+  transform: translateY(-2px);
+  background: var(--terracotta);
+  box-shadow: 0 20px 44px rgb(185 81 47 / 0.22);
+}
+
+.cta-secondary {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: rgb(255 253 244 / 0.88);
+  padding: 0.8rem 1.25rem;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--foreground);
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.cta-secondary:hover {
+  transform: translateY(-2px);
+  border-color: var(--pool);
+  color: var(--pool-deep);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgb(56 184 199 / 0.5);
+  outline-offset: 3px;
+}
+
+.wave-divider {
+  clip-path: ellipse(72% 100% at 50% 100%);
 }

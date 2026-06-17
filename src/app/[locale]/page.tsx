@@ -1,0 +1,258 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Euro } from "lucide-react";
+import { BookingForm } from "@/components/BookingForm";
+import { GalleryGrid } from "@/components/GalleryGrid";
+import { PageHero } from "@/components/PageHero";
+import { SectionHeading } from "@/components/SectionHeading";
+import {
+  contact,
+  copy,
+  galleryImages,
+  pageMeta,
+  registrationNumber,
+  siteUrl,
+} from "@/data/site";
+import { isLocale, localizedPath, type Locale } from "@/lib/i18n";
+
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : "en";
+  const meta = pageMeta[locale].home;
+
+  return {
+    title: meta.title,
+    description: meta.description,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: { en: "/en", nl: "/nl", es: "/es" },
+    },
+    openGraph: {
+      title: meta.title,
+      description: meta.description,
+      images: [galleryImages[0].src],
+    },
+  };
+}
+
+export default async function LocaleHome({ params }: PageProps) {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : "en";
+  const t = copy[locale];
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    name: "Casa la Sorpresa",
+    url: `${siteUrl}/${locale}`,
+    image: galleryImages.map((image) => image.src),
+    description: pageMeta[locale].home.description,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Alhaurin de la Torre",
+      addressRegion: "Malaga",
+      addressCountry: "ES",
+    },
+    email: contact.email,
+    telephone: contact.phone,
+    amenityFeature: t.amenities.map((amenity) => ({
+      "@type": "LocationFeatureSpecification",
+      name: amenity.title,
+      value: true,
+    })),
+    maximumAttendeeCapacity: 4,
+    identifier: registrationNumber,
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <PageHero locale={locale} />
+
+      <section className="bg-cream px-5 py-12 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {t.stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-[1.7rem] border border-border bg-background p-6"
+            >
+              <p className="text-4xl font-black text-citrus">{stat.value}</p>
+              <p className="mt-1 text-sm font-bold uppercase tracking-[0.16em] text-muted">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-band bg-background px-5 py-20 lg:px-8">
+        <span className="shape-sun right-10 top-16 h-28 w-28" />
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+          <SectionHeading
+            eyebrow={t.sections.stayEyebrow}
+            title={t.sections.stayTitle}
+            text={t.sections.stayText}
+          />
+          <div className="grid gap-4 sm:grid-cols-2">
+            {t.amenities.map((amenity) => {
+              const Icon = amenity.icon;
+              return (
+                <div
+                  key={amenity.title}
+                  className="organic-card rounded-[1.7rem] p-6"
+                >
+                  <Icon className="h-7 w-7 text-pool-deep" aria-hidden="true" />
+                  <h3 className="mt-5 text-xl font-black">{amenity.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-muted">
+                    {amenity.text}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-sand/55 px-5 py-20 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr]">
+          <div>
+            <SectionHeading
+              eyebrow={t.sections.galleryEyebrow}
+              title={t.sections.galleryTitle}
+              text={t.sections.galleryText}
+            />
+            <div className="mt-8">
+              <GalleryGrid locale={locale} />
+            </div>
+          </div>
+          <div className="relative min-h-[520px]">
+            <div className="absolute left-0 top-0 w-4/5 overflow-hidden rounded-[2.4rem] border-[8px] border-cream shadow-2xl">
+              <Image
+                src={galleryImages[4].src}
+                alt={galleryImages[4].alt}
+                width={900}
+                height={1100}
+                className="aspect-[4/5] object-cover"
+              />
+            </div>
+            <div className="absolute bottom-0 right-0 w-3/5 overflow-hidden arch-mask border-[8px] border-cream shadow-2xl">
+              <Image
+                src={galleryImages[1].src}
+                alt={galleryImages[1].alt}
+                width={900}
+                height={1000}
+                className="aspect-[4/5] object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-band bg-cream px-5 py-20 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading
+            eyebrow={t.sections.areaEyebrow}
+            title={t.sections.areaTitle}
+            text={t.sections.areaText}
+          />
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {t.attractions.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.title}
+                  className="rounded-[1.7rem] bg-background p-6"
+                >
+                  <Icon className="h-7 w-7 text-citrus" aria-hidden="true" />
+                  <h3 className="mt-5 text-xl font-black">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-muted">
+                    {item.text}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-pool-deep px-5 py-20 text-cream lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.22em] text-sun">
+              {t.sections.bookingEyebrow}
+            </p>
+            <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
+              {t.sections.bookingTitle}
+            </h2>
+            <p className="mt-5 max-w-xl text-lg leading-8 text-cream/78">
+              {t.sections.bookingText}
+            </p>
+            <div className="mt-8 grid gap-3">
+              {t.rateSeasons.map((season) => (
+                <div
+                  key={season.name}
+                  className="flex items-center justify-between rounded-3xl border border-cream/14 bg-cream/10 px-5 py-4"
+                >
+                  <div>
+                    <p className="font-black">{season.name}</p>
+                    <p className="text-sm text-cream/70">{season.months}</p>
+                  </div>
+                  <p className="flex items-center gap-1 font-black text-sun">
+                    <Euro className="h-4 w-4" aria-hidden="true" />
+                    {season.nightly}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <BookingForm locale={locale} />
+        </div>
+      </section>
+
+      <section className="bg-background px-5 py-20 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <SectionHeading
+              eyebrow={t.sections.detailsEyebrow}
+              title={t.sections.detailsTitle}
+              text={t.sections.detailsText}
+            />
+            <Link
+              href={localizedPath(locale, "/contact")}
+              className="cta-secondary mt-8"
+            >
+              {t.sections.contactTitle}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {t.stayDetails.map((detail) => {
+              const Icon = detail.icon;
+              return (
+                <div
+                  key={detail.title}
+                  className="rounded-[1.7rem] border border-border bg-cream p-6"
+                >
+                  <Icon className="h-7 w-7 text-pool-deep" aria-hidden="true" />
+                  <h3 className="mt-5 text-xl font-black">{detail.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-muted">
+                    {detail.text}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
