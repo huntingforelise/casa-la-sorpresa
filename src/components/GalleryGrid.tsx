@@ -35,12 +35,10 @@ export const GalleryGrid = ({ locale }: { locale: Locale }) => {
         ))}
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {images.map((image, index) => (
+        {images.map((image) => (
           <div
             key={image.src}
-            className={`overflow-hidden border-[8px] border-cream shadow-[0_18px_54px_rgba(85,107,47,0.12)] ${
-              index % 3 === 0 ? "rounded-[2rem]" : "arch-mask"
-            }`}
+            className="overflow-hidden rounded-[2rem] border-[8px] border-cream shadow-[0_18px_54px_rgba(85,107,47,0.12)]"
           >
             <Image
               src={image.src}

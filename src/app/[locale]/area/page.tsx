@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
-import { copy, pageMeta } from "@/data/site";
+import { areaImages, copy, pageMeta } from "@/data/site";
 import { isLocale, type Locale } from "@/lib/i18n";
 
 type PageProps = { params: Promise<{ locale: string }> };
@@ -41,6 +42,22 @@ export default async function AreaPage({ params }: PageProps) {
               </article>
             );
           })}
+        </div>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {areaImages.map((image) => (
+            <div
+              key={image.src}
+              className="overflow-hidden rounded-[2rem] border-[8px] border-white shadow-[0_18px_54px_rgba(85,107,47,0.12)]"
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                width={900}
+                height={700}
+                className="aspect-[4/3] h-full w-full object-cover transition duration-500 hover:scale-105"
+              />
+            </div>
+          ))}
         </div>
         <div className="mt-10 rounded-[2rem] bg-pool-deep p-7 text-cream">
           <MapPin className="h-7 w-7 text-sun" aria-hidden="true" />

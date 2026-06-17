@@ -126,7 +126,7 @@ export const galleryImages = [
   },
   {
     src: "https://static.wixstatic.com/media/e5e27a_741e948668624bc3847333576ab3d650~mv2.jpeg",
-    alt: "Casa la Sorpresa evening view",
+    alt: "Casa la Sorpresa night view",
     category: "views",
   },
   {
@@ -140,9 +140,64 @@ export const galleryImages = [
     category: "pool",
   },
   {
+    src: "https://static.wixstatic.com/media/e5e27a_b3055a18c15141a68aff6eb37a0a7ebb~mv2.jpeg",
+    alt: "Casa la Sorpresa poolside terrace",
+    category: "pool",
+  },
+  {
     src: "https://static.wixstatic.com/media/e5e27a_b3f5e52eb31d4878b2ecdff0baa4f70c~mv2.jpeg",
     alt: "Orange tree garden at Casa la Sorpresa",
     category: "garden",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_0e624e50450743b8967c3952b9ed7a89~mv2.jpeg",
+    alt: "Orange tree garden dining area",
+    category: "garden",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_606d77f8c4a24860b34fa04d82e3f97e~mv2.jpeg",
+    alt: "Orange tree garden poolside",
+    category: "garden",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_d10fc5b99db040a992893e6c874171c5~mv2.jpeg",
+    alt: "South-facing terrace at Casa la Sorpresa",
+    category: "garden",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_224908dc28b14a93a7b041738ffedc01~mv2.jpeg",
+    alt: "Sunny terrace at Casa la Sorpresa",
+    category: "garden",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_a726766881aa45019583495e2a1f3862~mv2.jpeg",
+    alt: "Casa la Sorpresa sunset poolside",
+    category: "pool",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_305fec1c4ce74b7ab5c06b8dcc771b5c~mv2.jpeg",
+    alt: "Casa la Sorpresa sunset view",
+    category: "views",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_36937d19251e4312ba47c41193c342f8~mv2.jpeg",
+    alt: "Casa la Sorpresa pool and terrace",
+    category: "pool",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_defaf331c4a24e3c9cf8235a69df0033~mv2.jpeg",
+    alt: "Casa la Sorpresa mountain view",
+    category: "views",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_4d64aec643df4f75a49bcd47f427a7ea~mv2.jpg",
+    alt: "Oranges in the Casa la Sorpresa garden",
+    category: "garden",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_4849520dfa5b4a3c8bf1f5bd62626d52~mv2.jpeg",
+    alt: "Casa la Sorpresa valley view",
+    category: "views",
   },
   {
     src: "https://static.wixstatic.com/media/e5e27a_d9133b3689434f1faaa6cc885b3f48e0~mv2.jpg",
@@ -150,14 +205,79 @@ export const galleryImages = [
     category: "inside",
   },
   {
+    src: "https://static.wixstatic.com/media/e5e27a_543480e6cfda462b9e9eb38938c88cb5~mv2.jpg",
+    alt: "Sunrise view from Casa la Sorpresa",
+    category: "views",
+  },
+  {
     src: "https://static.wixstatic.com/media/e5e27a_ddc64786915e436e9330bd9f0396bfc6~mv2.jpeg",
     alt: "Bathroom at Casa la Sorpresa",
     category: "inside",
   },
   {
-    src: "https://static.wixstatic.com/media/e5e27a_543480e6cfda462b9e9eb38938c88cb5~mv2.jpg",
-    alt: "Sunrise view from Casa la Sorpresa",
+    src: "https://static.wixstatic.com/media/e5e27a_6d80705d5b5d4bbf8744b5e02a6a1578~mv2.jpg",
+    alt: "Casa la Sorpresa terrace and pool view",
+    category: "pool",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_cbda9ac16a2b4197bd3f72b1871c4421~mv2.jpg",
+    alt: "Wide mountain view from Casa la Sorpresa",
     category: "views",
+  },
+];
+
+export const areaImages = [
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_e47f0fd3cc704a5bbfb63f9e44f1235b~mv2.jpg",
+    alt: "Alhaurin de la Torre near Casa la Sorpresa",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_0c089aff69924d06a2d4b39364fd4242~mv2.jpg",
+    alt: "Nearby Andalusian village",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_23e28d366ff745638f7a7a459252c73f~mv2.jpg",
+    alt: "Nearby Costa del Sol beach",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_2b9e78a8e27b4ce6a9fa3bbdc86ecc5a~mv2.jpg",
+    alt: "Nearby coastal town",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_35b36310a80f468381548980129b4fa1~mv2.jpg",
+    alt: "Nearby mountain landscape",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_3bb08398bff94cbfac4740788ce19029~mv2.jpg",
+    alt: "Nearby Andalusian street",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_702e6bd54e1c4cf7ba613b84a12a15c8~mv2.jpg",
+    alt: "Nearby Costa del Sol scenery",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_843c25ad8bb04a928b216f181f1507d4~mv2.jpg",
+    alt: "Nearby white village view",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_a3223b6d307f4c42891776e4732216fd~mv2.jpg",
+    alt: "Nearby beach and sea view",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_d7568fb4f8544dbba104c5f55c674c61~mv2.jpg",
+    alt: "Nearby Andalusian landscape",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_6fd6cc4619a14ecc8d602bc13a5c522e~mv2.jpg",
+    alt: "Malaga City",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_be5cdd2df3e1483486f231c5de7f670c~mv2.jpg",
+    alt: "Fuengirola promenade",
+  },
+  {
+    src: "https://static.wixstatic.com/media/e5e27a_d57eeb31d991411b955f06b0a20ec1ec~mv2.jpg",
+    alt: "Mijas Pueblo",
   },
 ];
 
