@@ -3,38 +3,54 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { copy, galleryImages } from "@/data/site";
+import type { GalleryImage } from "@/data/site";
 import type { Locale } from "@/lib/i18n";
 
 const filters = ["all", "pool", "inside", "garden", "views"] as const;
 
-export const GalleryGrid = ({ locale }: { locale: Locale }) => {
+type GalleryGridProps = {
+  locale: Locale;
+  images?: GalleryImage[];
+  gridClassName?: string;
+  showFilters?: boolean;
+};
+
+export const GalleryGrid = ({
+  locale,
+  gridClassName = "grid gap-4 sm:grid-cols-2 lg:grid-cols-3",
+  images: selectedImages,
+  showFilters = true,
+}: GalleryGridProps) => {
   const t = copy[locale].galleryFilters;
   const [active, setActive] = useState<(typeof filters)[number]>("all");
+  const sourceImages = selectedImages ?? galleryImages;
   const images = useMemo(() => {
     return active === "all"
-      ? galleryImages
-      : galleryImages.filter((image) => image.category === active);
-  }, [active]);
+      ? sourceImages
+      : sourceImages.filter((image) => image.category === active);
+  }, [active, sourceImages]);
 
   return (
     <div className="grid gap-6">
-      <div className="flex flex-wrap gap-2">
-        {filters.map((filter) => (
-          <button
-            key={filter}
-            type="button"
-            onClick={() => setActive(filter)}
-            className={`rounded-full px-4 py-2 text-sm font-black capitalize transition ${
-              active === filter
-                ? "bg-citrus text-cream"
-                : "border border-border bg-cream text-foreground hover:border-pool"
-            }`}
-          >
-            {t[filter]}
-          </button>
-        ))}
-      </div>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {showFilters ? (
+        <div className="flex flex-wrap gap-2">
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              type="button"
+              onClick={() => setActive(filter)}
+              className={`rounded-full px-4 py-2 text-sm font-black capitalize transition ${
+                active === filter
+                  ? "bg-citrus text-cream"
+                  : "border border-border bg-cream text-foreground hover:border-pool"
+              }`}
+            >
+              {t[filter]}
+            </button>
+          ))}
+        </div>
+      ) : null}
+      <div className={gridClassName}>
         {images.map((image) => (
           <div
             key={image.src}

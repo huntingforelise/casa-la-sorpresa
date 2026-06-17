@@ -10,6 +10,7 @@ import {
   contact,
   copy,
   galleryImages,
+  homeGalleryImages,
   pageMeta,
   registrationNumber,
   siteUrl,
@@ -46,6 +47,8 @@ export default async function LocaleHome({ params }: PageProps) {
   const { locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : "en";
   const t = copy[locale];
+  const homeGridImages = homeGalleryImages.slice(0, 4);
+  const homeFeatureImages = homeGalleryImages.slice(4, 6);
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
@@ -123,7 +126,7 @@ export default async function LocaleHome({ params }: PageProps) {
       </section>
 
       <section className="bg-sand/55 px-5 py-20 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr]">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <SectionHeading
               eyebrow={t.sections.galleryEyebrow}
@@ -131,29 +134,36 @@ export default async function LocaleHome({ params }: PageProps) {
               text={t.sections.galleryText}
             />
             <div className="mt-8">
-              <GalleryGrid locale={locale} />
-            </div>
-          </div>
-          <div className="relative min-h-[520px]">
-            <div className="absolute left-0 top-0 w-4/5 overflow-hidden rounded-[2.4rem] border-[8px] border-cream shadow-2xl">
-              <Image
-                src={galleryImages[4].src}
-                alt={galleryImages[4].alt}
-                width={900}
-                height={1100}
-                className="aspect-[4/5] object-cover"
-              />
-            </div>
-            <div className="absolute bottom-0 right-0 w-3/5 overflow-hidden arch-mask border-[8px] border-cream shadow-2xl">
-              <Image
-                src={galleryImages[1].src}
-                alt={galleryImages[1].alt}
-                width={900}
-                height={1000}
-                className="aspect-[4/5] object-cover"
+              <GalleryGrid
+                locale={locale}
+                gridClassName="grid gap-4 sm:grid-cols-2"
+                images={homeGridImages}
+                showFilters={false}
               />
             </div>
           </div>
+          {homeFeatureImages.length === 2 ? (
+            <div className="relative min-h-[500px] lg:-ml-2 xl:-ml-4">
+              <div className="absolute left-0 top-0 w-[76%] overflow-hidden rounded-[2.4rem] border-[8px] border-cream shadow-2xl">
+                <Image
+                  src={homeFeatureImages[0].src}
+                  alt={homeFeatureImages[0].alt}
+                  width={900}
+                  height={1100}
+                  className="aspect-[4/5] h-full w-full object-cover"
+                />
+              </div>
+              <div className="absolute bottom-0 right-0 w-[52%] overflow-hidden arch-mask border-[8px] border-cream shadow-2xl">
+                <Image
+                  src={homeFeatureImages[1].src}
+                  alt={homeFeatureImages[1].alt}
+                  width={900}
+                  height={1000}
+                  className="aspect-[4/5] h-full w-full object-cover"
+                />
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
 

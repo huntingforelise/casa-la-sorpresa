@@ -282,6 +282,18 @@ export const areaImages = [
 ];
 
 export type GalleryCategory = (typeof galleryImages)[number]["category"];
+export type GalleryImage = (typeof galleryImages)[number];
+
+// Edit this list to choose which images appear on the homepage.
+// The first 4 appear in the grid; the next 2 appear as larger feature images.
+export const homeGalleryImages = [
+  galleryImages[0],
+  galleryImages[2],
+  galleryImages[4],
+  galleryImages[6],
+  galleryImages[11],
+  galleryImages[17],
+] satisfies GalleryImage[];
 
 export const amenities: Array<{
   title: string;
@@ -324,7 +336,7 @@ export const stats = [
   { value: "4", label: "guests" },
   { value: "2", label: "bedrooms" },
   { value: "15", label: "min to airport" },
-  { value: "VFT", label: "registered stay" },
+  { value: "3", label: "hosts" },
 ];
 
 export const stayDetails = [
