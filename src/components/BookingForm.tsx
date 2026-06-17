@@ -19,6 +19,8 @@ type FormState = {
 };
 
 const today = new Date().toISOString().slice(0, 10);
+const fieldClass =
+  "rounded-2xl border border-border bg-cream px-4 py-3 text-foreground caret-foreground placeholder:text-muted [color-scheme:light]";
 
 export const BookingForm = ({ locale }: BookingFormProps) => {
   const t = copy[locale].booking;
@@ -86,7 +88,7 @@ export const BookingForm = ({ locale }: BookingFormProps) => {
             type="date"
             value={form.arrival}
             onChange={(event) => update("arrival", event.target.value)}
-            className="rounded-2xl border border-border bg-cream px-4 py-3"
+            className={fieldClass}
           />
         </label>
         <label className="grid gap-2 text-sm font-bold">
@@ -97,7 +99,7 @@ export const BookingForm = ({ locale }: BookingFormProps) => {
             type="date"
             value={form.departure}
             onChange={(event) => update("departure", event.target.value)}
-            className="rounded-2xl border border-border bg-cream px-4 py-3"
+            className={fieldClass}
           />
         </label>
       </div>
@@ -108,7 +110,7 @@ export const BookingForm = ({ locale }: BookingFormProps) => {
           <select
             value={form.guests}
             onChange={(event) => update("guests", event.target.value)}
-            className="rounded-2xl border border-border bg-cream px-4 py-3"
+            className={fieldClass}
           >
             {Array.from({ length: maxGuests }, (_, index) => index + 1).map(
               (guestCount) => (
@@ -125,7 +127,7 @@ export const BookingForm = ({ locale }: BookingFormProps) => {
             required
             value={form.name}
             onChange={(event) => update("name", event.target.value)}
-            className="rounded-2xl border border-border bg-cream px-4 py-3"
+            className={fieldClass}
           />
         </label>
       </div>
@@ -137,7 +139,7 @@ export const BookingForm = ({ locale }: BookingFormProps) => {
           type="email"
           value={form.email}
           onChange={(event) => update("email", event.target.value)}
-          className="rounded-2xl border border-border bg-cream px-4 py-3"
+          className={fieldClass}
         />
       </label>
 
@@ -147,7 +149,7 @@ export const BookingForm = ({ locale }: BookingFormProps) => {
           value={form.notes}
           onChange={(event) => update("notes", event.target.value)}
           rows={4}
-          className="resize-none rounded-2xl border border-border bg-cream px-4 py-3"
+          className={`${fieldClass} resize-none`}
         />
       </label>
 
