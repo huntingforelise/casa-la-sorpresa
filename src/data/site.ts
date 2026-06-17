@@ -3,7 +3,6 @@ import {
   Bath,
   BedDouble,
   Car,
-  Coffee,
   Mountain,
   Plane,
   ShieldCheck,
@@ -311,6 +310,11 @@ export const amenities: Array<{
     icon: Waves,
   },
   {
+    title: "Terraces and garden",
+    text: "Warm outdoor spaces for breakfast, reading, swimming, and golden-hour drinks.",
+    icon: Sun,
+  },
+  {
     title: "Air conditioning",
     text: "Cool, comfortable rooms during Andalusian summers.",
     icon: AirVent,
@@ -324,11 +328,6 @@ export const amenities: Array<{
     title: "Free parking",
     text: "Easy arrival by car and day trips along the coast.",
     icon: Car,
-  },
-  {
-    title: "Kitchen comfort",
-    text: "Coffee, relaxed breakfasts, and simple meals at home.",
-    icon: Coffee,
   },
 ];
 
@@ -570,6 +569,11 @@ export const copy: Record<Locale, PageCopy> = {
         icon: Waves,
       },
       {
+        title: "Terrassen en tuin",
+        text: "Warme buitenruimtes voor ontbijt, lezen, zwemmen en drankjes bij zonsondergang.",
+        icon: Sun,
+      },
+      {
         title: "Airconditioning",
         text: "Koele, comfortabele kamers tijdens Andalusische zomers.",
         icon: AirVent,
@@ -583,11 +587,6 @@ export const copy: Record<Locale, PageCopy> = {
         title: "Gratis parkeren",
         text: "Makkelijk aankomen met de auto en eenvoudig op daguitstap.",
         icon: Car,
-      },
-      {
-        title: "Comfortabele keuken",
-        text: "Koffie, ontspannen ontbijten en eenvoudige maaltijden thuis.",
-        icon: Coffee,
       },
     ],
     stayDetails: [
@@ -741,6 +740,11 @@ export const copy: Record<Locale, PageCopy> = {
         icon: Waves,
       },
       {
+        title: "Terrazas y jardin",
+        text: "Espacios exteriores calidos para desayunar, leer, nadar y tomar algo al atardecer.",
+        icon: Sun,
+      },
+      {
         title: "Aire acondicionado",
         text: "Habitaciones frescas y comodas durante los veranos andaluces.",
         icon: AirVent,
@@ -754,11 +758,6 @@ export const copy: Record<Locale, PageCopy> = {
         title: "Parking gratuito",
         text: "Llegada facil en coche y excursiones sencillas por la costa.",
         icon: Car,
-      },
-      {
-        title: "Cocina practica",
-        text: "Cafe, desayunos tranquilos y comidas sencillas en casa.",
-        icon: Coffee,
       },
     ],
     stayDetails: [
