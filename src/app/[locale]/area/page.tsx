@@ -7,15 +7,15 @@ import { isLocale, type Locale } from "@/lib/i18n";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
-export async function generateMetadata({
+export const generateMetadata = async ({
   params,
-}: PageProps): Promise<Metadata> {
+}: PageProps): Promise<Metadata> => {
   const { locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : "en";
   return pageMeta[locale].area;
-}
+};
 
-export default async function AreaPage({ params }: PageProps) {
+const AreaPage = async ({ params }: PageProps) => {
   const { locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : "en";
   const t = copy[locale];
@@ -68,4 +68,6 @@ export default async function AreaPage({ params }: PageProps) {
       </div>
     </section>
   );
-}
+};
+
+export default AreaPage;

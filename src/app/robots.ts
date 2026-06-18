@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/data/site";
 
-export default function robots(): MetadataRoute.Robots {
+const robots = (): MetadataRoute.Robots => {
   return {
     rules: {
       userAgent: "*",
@@ -9,4 +9,6 @@ export default function robots(): MetadataRoute.Robots {
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   };
-}
+};
+
+export default robots;

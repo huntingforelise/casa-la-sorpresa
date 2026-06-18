@@ -4,7 +4,7 @@ import { getStripe } from "@/lib/stripe";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { siteUrl } from "@/data/site";
 
-export async function POST(request: Request) {
+export const POST = async (request: Request) => {
   const parsed = bookingRequestSchema.safeParse(await request.json());
 
   if (!parsed.success) {
@@ -115,4 +115,4 @@ export async function POST(request: Request) {
     .eq("id", hold.id);
 
   return NextResponse.json({ url: session.url, quote });
-}
+};

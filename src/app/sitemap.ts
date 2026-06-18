@@ -4,7 +4,7 @@ import { locales } from "@/lib/i18n";
 
 const routes = ["", "/stay", "/gallery", "/area", "/booking", "/contact"];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+const sitemap = (): MetadataRoute.Sitemap => {
   const lastModified = new Date();
 
   return locales.flatMap((locale) =>
@@ -16,4 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       images: route === "" || route === "/gallery" ? galleryImages.map((image) => image.src) : undefined,
     })),
   );
-}
+};
+
+export default sitemap;

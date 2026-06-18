@@ -3,7 +3,7 @@ import type Stripe from "stripe";
 import { getStripe } from "@/lib/stripe";
 import { getSupabaseAdmin } from "@/lib/supabase";
 
-export async function POST(request: Request) {
+export const POST = async (request: Request) => {
   const stripe = getStripe();
   const supabase = getSupabaseAdmin();
   const signature = request.headers.get("stripe-signature");
@@ -64,4 +64,4 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.json({ received: true });
-}
+};

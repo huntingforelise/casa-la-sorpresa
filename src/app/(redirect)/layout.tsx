@@ -36,11 +36,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RedirectRootLayout({
+const RedirectRootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html
       lang="en"
@@ -52,4 +52,6 @@ export default function RedirectRootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RedirectRootLayout;

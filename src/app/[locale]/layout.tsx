@@ -50,10 +50,10 @@ type LocaleLayoutProps = {
   params: Promise<{ locale: string }>;
 };
 
-export default async function LocaleLayout({
+const LocaleLayout = async ({
   children,
   params,
-}: LocaleLayoutProps) {
+}: LocaleLayoutProps) => {
   const { locale: rawLocale } = await params;
 
   if (!isLocale(rawLocale)) notFound();
@@ -75,4 +75,6 @@ export default async function LocaleLayout({
       </body>
     </html>
   );
-}
+};
+
+export default LocaleLayout;

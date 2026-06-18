@@ -28,9 +28,9 @@ type PageProps = {
   params: Promise<{ locale: string }>;
 };
 
-export async function generateMetadata({
+export const generateMetadata = async ({
   params,
-}: PageProps): Promise<Metadata> {
+}: PageProps): Promise<Metadata> => {
   const { locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : "en";
   const meta = pageMeta[locale].home;
@@ -48,9 +48,9 @@ export async function generateMetadata({
       images: [galleryImages[0].src],
     },
   };
-}
+};
 
-export default async function LocaleHome({ params }: PageProps) {
+const LocaleHome = async ({ params }: PageProps) => {
   const { locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : "en";
   const t = copy[locale];
@@ -314,4 +314,6 @@ export default async function LocaleHome({ params }: PageProps) {
       </section>
     </>
   );
-}
+};
+
+export default LocaleHome;

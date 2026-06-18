@@ -6,13 +6,13 @@ import { isLocale, type Locale } from "@/lib/i18n";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   const { locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : "en";
   return pageMeta[locale].gallery;
-}
+};
 
-export default async function GalleryPage({ params }: PageProps) {
+const GalleryPage = async ({ params }: PageProps) => {
   const { locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : "en";
   const t = copy[locale];
@@ -32,4 +32,6 @@ export default async function GalleryPage({ params }: PageProps) {
       </div>
     </section>
   );
-}
+};
+
+export default GalleryPage;
