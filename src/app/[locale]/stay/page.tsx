@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { SectionHeading } from "@/components/SectionHeading";
-import {
-  copy,
-  galleryImages,
-  pageMeta,
-  registrationNumber,
-} from "@/data/site";
+import { copy, galleryImages, pageMeta } from "@/data/site";
 import { isLocale, type Locale } from "@/lib/i18n";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { locale: rawLocale } = await params;
   const locale = isLocale(rawLocale) ? rawLocale : "en";
   return pageMeta[locale].stay;
@@ -32,15 +29,15 @@ export default async function StayPage({ params }: PageProps) {
             title={t.sections.stayTitle}
             text={t.sections.stayText}
           />
-          <p className="mt-6 rounded-3xl bg-sun/36 p-5 font-mono text-sm font-bold">
-            {t.common.registration} {registrationNumber}
-          </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {[...t.stayDetails, ...t.amenities].map((item) => {
             const Icon = item.icon;
             return (
-              <div key={item.title} className="organic-card rounded-[1.7rem] p-6">
+              <div
+                key={item.title}
+                className="organic-card rounded-[1.7rem] p-6"
+              >
                 <Icon className="h-7 w-7 text-pool-deep" aria-hidden="true" />
                 <h2 className="mt-5 text-xl font-black">{item.title}</h2>
                 <p className="mt-2 text-sm leading-6 text-muted">{item.text}</p>

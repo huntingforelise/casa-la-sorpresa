@@ -32,7 +32,11 @@ export const LanguageSwitcher = ({
           <Link
             key={option}
             href={hrefFor(option)}
-            className="rounded-full border border-cream/18 px-3 py-1 text-xs font-black hover:border-sun hover:text-sun"
+            className={`rounded-full border px-3 py-1 text-xs font-black transition ${
+              option === locale
+                ? "border-pool bg-pool text-cream"
+                : "border-border bg-cream/70 text-muted hover:border-pool hover:text-pool-deep"
+            }`}
             aria-label={localeNames[option]}
           >
             {option.toUpperCase()}
