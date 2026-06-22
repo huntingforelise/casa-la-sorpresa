@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import type { ReactNode } from "react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -72,6 +73,7 @@ const LocaleLayout = async ({
           <main>{children}</main>
           <SiteFooter locale={locale} />
         </div>
+        <Analytics />
       </body>
     </html>
   );
