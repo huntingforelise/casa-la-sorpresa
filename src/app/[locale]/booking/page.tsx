@@ -30,13 +30,24 @@ const BookingPage = async ({ params }: PageProps) => {
             {t.sections.bookingText}
           </p>
           <div className="mt-8 grid gap-3">
+            <div className="rounded-3xl border border-cream/14 bg-cream/10 px-5 py-4">
+              <p className="font-black">{t.bookingPolicies.title}</p>
+              <div className="mt-3 grid gap-3">
+                {t.bookingPolicies.items.map((item) => (
+                  <p key={item.label} className="text-sm leading-6 text-cream/72">
+                    <span className="font-black text-cream">{item.label}:</span>{" "}
+                    {item.text}
+                  </p>
+                ))}
+              </div>
+            </div>
             {t.rateSeasons.map((season) => (
               <div
                 key={season.name}
                 className="rounded-3xl border border-cream/14 bg-cream/10 px-5 py-4"
               >
                 <p className="font-black">{season.name}</p>
-              <p className="text-sm text-cream/70">
+                <p className="text-sm text-cream/70">
                   {season.months} - {t.bookingRateSuffix} {season.nightly}/
                   {t.bookingNight}
                 </p>

@@ -72,6 +72,20 @@ export type PageCopy = {
     submit: string;
     demo: string;
   };
+  bookingPolicies: {
+    title: string;
+    items: Array<{ label: string; text: string }>;
+  };
+  sharedPoolNote: {
+    title: string;
+    text: string;
+  };
+  faq: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    items: Array<{ question: string; answer: string }>;
+  };
   contactPrompts: Array<{
     title: string;
     text: string;
@@ -109,6 +123,14 @@ export const siteUrl =
 export const registrationNumber = "VFT/MA/43321";
 
 export const maxGuests = 4;
+
+export const minimumStayNights = 5;
+
+export const stayDiscounts = [
+  { nights: 7, label: "1 week", percent: 5 },
+  { nights: 14, label: "2 weeks", percent: 10 },
+  { nights: 30, label: "1 month", percent: 20 },
+];
 
 export const contact = {
   email: "hello@casalasorpresa.com",
@@ -449,7 +471,7 @@ export const copy: Record<Locale, PageCopy> = {
     booking: {
       title: "Start a booking",
       intro:
-        "Choose dates and guests. We will validate availability before creating a deposit checkout.",
+        "Choose dates and guests. Stays start at 5 nights, and longer stays are discounted automatically.",
       arrival: "Arrival",
       departure: "Departure",
       guests: "Guests",
@@ -458,6 +480,49 @@ export const copy: Record<Locale, PageCopy> = {
       notes: "Notes",
       submit: "Continue to deposit",
       demo: "Demo mode: add Supabase and Stripe environment variables to activate live deposits.",
+    },
+    bookingPolicies: {
+      title: "Booking notes",
+      items: [
+        {
+          label: "Minimum stay",
+          text: "Casa la Sorpresa has a 5-night minimum stay.",
+        },
+        {
+          label: "Longer stays",
+          text: "Longer stays receive automatic discounts: 1 week 5%, 2 weeks 10%, and 1 month 20%.",
+        },
+      ],
+    },
+    sharedPoolNote: {
+      title: "A note about the pool",
+      text: "The pool is shared with the owners, who will always do their best to respect guests' personal space.",
+    },
+    faq: {
+      eyebrow: "FAQ",
+      title: "Good to know",
+      intro: "A few practical details guests often want clear before booking.",
+      items: [
+        {
+          question: "Is the pool private?",
+          answer:
+            "The pool is shared with the owners. They will always do their best to respect guests' personal space, but it is a shared outdoor space.",
+        },
+        {
+          question: "What is the minimum stay?",
+          answer: "The minimum stay is 5 nights.",
+        },
+        {
+          question: "Do you discount longer stays?",
+          answer:
+            "Yes. Stays of 1 week receive 5% off, 2 weeks receive 10% off, and 1 month receives 20% off.",
+        },
+        {
+          question: "Can we ask a question before booking?",
+          answer:
+            "Yes. Send your dates, group size and any arrival notes, and we will help you choose the best next step.",
+        },
+      ],
     },
     contactPrompts: [
       {
@@ -552,7 +617,7 @@ export const copy: Record<Locale, PageCopy> = {
     booking: {
       title: "Start je boeking",
       intro:
-        "Kies data en gasten. We controleren beschikbaarheid voordat de aanbetaling wordt aangemaakt.",
+        "Kies data en gasten. Verblijven starten vanaf 5 nachten en langere verblijven krijgen automatisch korting.",
       arrival: "Aankomst",
       departure: "Vertrek",
       guests: "Gasten",
@@ -561,6 +626,49 @@ export const copy: Record<Locale, PageCopy> = {
       notes: "Opmerkingen",
       submit: "Ga naar aanbetaling",
       demo: "Demomodus: voeg Supabase- en Stripe-omgevingsvariabelen toe voor live betalingen.",
+    },
+    bookingPolicies: {
+      title: "Boekingsinfo",
+      items: [
+        {
+          label: "Minimumverblijf",
+          text: "Casa la Sorpresa heeft een minimumverblijf van 5 nachten.",
+        },
+        {
+          label: "Langere verblijven",
+          text: "Langere verblijven krijgen automatisch korting: 1 week 5%, 2 weken 10% en 1 maand 20%.",
+        },
+      ],
+    },
+    sharedPoolNote: {
+      title: "Een nota over het zwembad",
+      text: "Het zwembad wordt gedeeld met de eigenaars, die de persoonlijke ruimte van gasten altijd zo veel mogelijk respecteren.",
+    },
+    faq: {
+      eyebrow: "FAQ",
+      title: "Goed om te weten",
+      intro: "Een paar praktische details die gasten vaak graag duidelijk hebben voor ze boeken.",
+      items: [
+        {
+          question: "Is het zwembad prive?",
+          answer:
+            "Het zwembad wordt gedeeld met de eigenaars. Zij respecteren de persoonlijke ruimte van gasten zo veel mogelijk, maar het blijft een gedeelde buitenruimte.",
+        },
+        {
+          question: "Wat is het minimumverblijf?",
+          answer: "Het minimumverblijf is 5 nachten.",
+        },
+        {
+          question: "Krijgen langere verblijven korting?",
+          answer:
+            "Ja. Verblijven van 1 week krijgen 5% korting, 2 weken 10% en 1 maand 20%.",
+        },
+        {
+          question: "Kunnen we iets vragen voor we boeken?",
+          answer:
+            "Ja. Stuur je data, groepsgrootte en eventuele aankomstinfo, dan helpen we je met de beste volgende stap.",
+        },
+      ],
     },
     contactPrompts: [
       {
@@ -737,7 +845,7 @@ export const copy: Record<Locale, PageCopy> = {
     booking: {
       title: "Iniciar reserva",
       intro:
-        "Elige fechas y huespedes. Validaremos disponibilidad antes de crear el pago del deposito.",
+        "Elige fechas y huespedes. Las estancias empiezan en 5 noches y las estancias largas tienen descuento automatico.",
       arrival: "Llegada",
       departure: "Salida",
       guests: "Huespedes",
@@ -746,6 +854,49 @@ export const copy: Record<Locale, PageCopy> = {
       notes: "Notas",
       submit: "Continuar al deposito",
       demo: "Modo demo: anade variables de entorno de Supabase y Stripe para activar depositos reales.",
+    },
+    bookingPolicies: {
+      title: "Notas de reserva",
+      items: [
+        {
+          label: "Estancia minima",
+          text: "Casa la Sorpresa tiene una estancia minima de 5 noches.",
+        },
+        {
+          label: "Estancias largas",
+          text: "Las estancias largas tienen descuentos automaticos: 1 semana 5%, 2 semanas 10% y 1 mes 20%.",
+        },
+      ],
+    },
+    sharedPoolNote: {
+      title: "Una nota sobre la piscina",
+      text: "La piscina se comparte con los propietarios, que siempre intentaran respetar al maximo el espacio personal de los huespedes.",
+    },
+    faq: {
+      eyebrow: "FAQ",
+      title: "Conviene saber",
+      intro: "Algunos detalles practicos que los huespedes suelen querer claros antes de reservar.",
+      items: [
+        {
+          question: "La piscina es privada?",
+          answer:
+            "La piscina se comparte con los propietarios. Ellos intentaran respetar al maximo el espacio personal de los huespedes, pero es una zona exterior compartida.",
+        },
+        {
+          question: "Cual es la estancia minima?",
+          answer: "La estancia minima es de 5 noches.",
+        },
+        {
+          question: "Hay descuentos para estancias largas?",
+          answer:
+            "Si. Las estancias de 1 semana tienen 5% de descuento, 2 semanas 10% y 1 mes 20%.",
+        },
+        {
+          question: "Podemos hacer una pregunta antes de reservar?",
+          answer:
+            "Si. Envia tus fechas, numero de personas y cualquier detalle de llegada, y te ayudamos con el siguiente paso.",
+        },
+      ],
     },
     contactPrompts: [
       {

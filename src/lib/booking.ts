@@ -1,5 +1,10 @@
 import { z } from "zod";
-import { maxGuests, rateSeasons } from "@/data/site";
+import {
+  maxGuests,
+  minimumStayNights,
+  rateSeasons,
+  stayDiscounts,
+} from "@/data/site";
 
 export const bookingRequestSchema = z
   .object({
@@ -14,7 +19,20 @@ export const bookingRequestSchema = z
   .refine((value) => new Date(value.departure) > new Date(value.arrival), {
     message: "Departure must be after arrival.",
     path: ["departure"],
-  });
+  })
+  .refine(
+    (value) => nightsBetween(value.arrival, value.departure) >= minimumStayNights,
+    {
+      message: `Please choose at least ${minimumStayNights} nights.`,
+      path: ["departure"],
+    },
+  );
+
+export const discountForNights = (nights: number) => {
+  return [...stayDiscounts]
+    .sort((a, b) => b.nights - a.nights)
+    .find((discount) => nights >= discount.nights);
+};
 
 export type BookingRequest = z.infer<typeof bookingRequestSchema>;
 
@@ -36,12 +54,20 @@ export const nightlyRateFor = (arrival: string) => {
 export const quoteStay = (arrival: string, departure: string) => {
   const nights = nightsBetween(arrival, departure);
   const nightlyRate = nightlyRateFor(arrival);
-  const total = nights * nightlyRate;
+  const subtotal = nights * nightlyRate;
+  const discount = discountForNights(nights);
+  const discountAmount = discount
+    ? Math.round(subtotal * (discount.percent / 100))
+    : 0;
+  const total = subtotal - discountAmount;
   const deposit = Math.max(150, Math.round(total * 0.25));
 
   return {
     nights,
     nightlyRate,
+    subtotal,
+    discountPercent: discount?.percent ?? 0,
+    discountAmount,
     total,
     deposit,
     currency: "eur",

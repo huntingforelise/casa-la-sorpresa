@@ -17,13 +17,6 @@ export const POST = async (request: Request) => {
   const booking = parsed.data;
   const quote = quoteStay(booking.arrival, booking.departure);
 
-  if (quote.nights < 2) {
-    return NextResponse.json(
-      { error: "Please choose at least two nights." },
-      { status: 400 },
-    );
-  }
-
   const supabase = getSupabaseAdmin();
   const stripe = getStripe();
 
