@@ -39,11 +39,20 @@ const StayPage = async ({ params }: PageProps) => {
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            {[...t.stayDetails, ...t.amenities].map((item) => {
+            {[
+              ...t.stayDetails.map((item) => ({
+                ...item,
+                cardKey: `detail-${item.title}`,
+              })),
+              ...t.amenities.map((item) => ({
+                ...item,
+                cardKey: `amenity-${item.title}`,
+              })),
+            ].map((item) => {
               const Icon = item.icon;
               return (
                 <div
-                  key={item.title}
+                  key={item.cardKey}
                   className="organic-card rounded-[1.7rem] p-6"
                 >
                   <Icon className="h-7 w-7 text-pool-deep" aria-hidden="true" />
