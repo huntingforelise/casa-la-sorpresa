@@ -115,6 +115,10 @@ export type PageCopy = {
     title: string;
     text: string;
   };
+  lagosApartment: {
+    title: string;
+    text: string;
+  };
 };
 
 export const siteUrl =
@@ -557,8 +561,12 @@ export const copy: Record<Locale, PageCopy> = {
     bookingRateSuffix: "from EUR",
     bookingNight: "night",
     ownerStory: {
-      title: "Owner story placeholder",
-      text: "This section is ready for the new ownership story, updated host photo and more personal welcome copy before launch.",
+      title: "Meet your hosts",
+      text: "We are Elise and Julien, a Belgian couple in our thirties who met in Sydney, Australia. These days, life with our one-year-old son Noah is a mix of remote work, little family adventures, exploring new corners of Andalusia and making the most of days under the sun. Casa la Sorpresa is our place to share that slower Andalusian rhythm with guests.",
+    },
+    lagosApartment: {
+      title: "Also in Lagos",
+      text: "We also have a 2-bed, 2-bath apartment in Lagos, Portugal available for rent. More details and a separate website are coming soon.",
     },
   },
   nl: {
@@ -786,8 +794,12 @@ export const copy: Record<Locale, PageCopy> = {
     bookingRateSuffix: "vanaf EUR",
     bookingNight: "nacht",
     ownerStory: {
-      title: "Placeholder voor eigenaarsverhaal",
-      text: "Deze sectie is klaar voor het nieuwe eigenaarsverhaal, een bijgewerkte hostfoto en persoonlijkere welkomsttekst voor de lancering.",
+      title: "Maak kennis met je hosts",
+      text: "Wij zijn Elise en Julien, een Belgisch koppel in de dertig dat elkaar leerde kennen in Sydney, Australie. Vandaag is het leven met onze eenjarige zoon Noah een mix van remote werken, kleine familieavonturen, nieuwe plekken in Andalusie ontdekken en genieten van dagen onder de zon. Casa la Sorpresa is onze plek om dat tragere Andalusische ritme met gasten te delen.",
+    },
+    lagosApartment: {
+      title: "Ook in Lagos",
+      text: "We hebben ook een appartement met 2 slaapkamers en 2 badkamers in Lagos, Portugal. Meer details en een aparte website volgen binnenkort.",
     },
   },
   es: {
@@ -1015,8 +1027,12 @@ export const copy: Record<Locale, PageCopy> = {
     bookingRateSuffix: "desde EUR",
     bookingNight: "noche",
     ownerStory: {
-      title: "Texto provisional sobre los propietarios",
-      text: "Esta seccion esta lista para la nueva historia de propietarios, una foto actualizada del anfitrion y una bienvenida mas personal antes del lanzamiento.",
+      title: "Conoce a tus anfitriones",
+      text: "Somos Elise y Julien, una pareja belga de treinta y tantos que se conocio en Sydney, Australia. Hoy, la vida con nuestro hijo Noah, de un ano, mezcla trabajo en remoto, pequenas aventuras en familia, descubrir nuevos rincones de Andalucia y disfrutar de dias bajo el sol. Casa la Sorpresa es nuestro lugar para compartir ese ritmo andaluz mas pausado con los huespedes.",
+    },
+    lagosApartment: {
+      title: "Tambien en Lagos",
+      text: "Tambien tenemos un apartamento de 2 dormitorios y 2 banos en Lagos, Portugal. Pronto compartiremos mas detalles y una web aparte.",
     },
   },
 };
