@@ -363,7 +363,7 @@ export const amenities: Array<{
   },
   {
     title: "Fast WiFi",
-    text: "Stay connected when you want to.",
+    text: "Fast fibre connection for planning days out, streaming, and the occasional work call.",
     icon: Wifi,
   },
   {
@@ -457,12 +457,17 @@ export const copy: Record<Locale, PageCopy> = {
       primary: "Check availability",
       secondary: "Explore the house",
     },
-    highlights: ["Pool and terraces", "Sleeps 4", "Near Malaga airport"],
+    highlights: [
+      "Pool and terraces",
+      "Sleeps 4",
+      "Fast WiFi",
+      "Near Malaga airport",
+    ],
     sections: {
       stayEyebrow: "Stay",
-      stayTitle: "Everything for an easy summer stay",
+      stayTitle: "Everything for an easy stay",
       stayText:
-        "Relaxed indoor spaces, sunny outdoor corners and practical comforts for families and friends.",
+        "Relaxed indoor spaces, sunny outdoor corners and practical comforts for holidays, family time and longer stays.",
       galleryEyebrow: "Gallery",
       galleryTitle: "Real views, real sunshine",
       galleryText:
@@ -532,6 +537,11 @@ export const copy: Record<Locale, PageCopy> = {
           question: "Do you discount longer stays?",
           answer:
             "Yes. Stays of 1 week receive 5% off, 2 weeks receive 10% off, and 1 month receives 20% off.",
+        },
+        {
+          question: "Is the apartment set up to work from here?",
+          answer:
+            "Yes. The apartment has very fast fibre WiFi and comfortable indoor and outdoor spots, so guests can work from here when they need to.",
         },
         {
           question: "Are there supermarkets nearby?",
@@ -633,13 +643,14 @@ export const copy: Record<Locale, PageCopy> = {
     highlights: [
       "Zwembad en terrassen",
       "Voor 4 gasten",
+      "Snelle wifi",
       "Dicht bij Malaga airport",
     ],
     sections: {
       stayEyebrow: "Verblijf",
-      stayTitle: "Alles voor een ontspannen zomerverblijf",
+      stayTitle: "Alles voor een ontspannen verblijf",
       stayText:
-        "Gezellige binnenruimtes, zonnige buitenhoekjes en praktisch comfort voor families en vrienden.",
+        "Gezellige binnenruimtes, zonnige buitenhoekjes en praktisch comfort voor vakantie, familietijd en langere verblijven.",
       galleryEyebrow: "Galerij",
       galleryTitle: "Echte uitzichten, echte zon",
       galleryText:
@@ -712,6 +723,11 @@ export const copy: Record<Locale, PageCopy> = {
             "Ja. Verblijven van 1 week krijgen 5% korting, 2 weken 10% en 1 maand 20%.",
         },
         {
+          question: "Is het appartement geschikt om van hieruit te werken?",
+          answer:
+            "Ja. Het appartement heeft erg snelle glasvezelwifi en comfortabele plekken binnen en buiten, zodat gasten van hieruit kunnen werken wanneer dat nodig is.",
+        },
+        {
           question: "Zijn er supermarkten in de buurt?",
           answer:
             "Ja. Er is een gloednieuwe Lidl op ongeveer 2 minuten rijden, en in het centrum van Alhaurin de la Torre vind je meer supermarkten en winkels op ongeveer 5 minuten rijden.",
@@ -773,7 +789,7 @@ export const copy: Record<Locale, PageCopy> = {
       },
       {
         title: "Snelle wifi",
-        text: "Blijf verbonden wanneer je dat wilt.",
+        text: "Een snelle glasvezelverbinding voor uitstappen plannen, streamen en af en toe een werkgesprek.",
         icon: Wifi,
       },
       {
@@ -893,13 +909,14 @@ export const copy: Record<Locale, PageCopy> = {
     highlights: [
       "Piscina y terrazas",
       "Hasta 4 personas",
+      "Wifi rapido",
       "Cerca del aeropuerto",
     ],
     sections: {
       stayEyebrow: "Estancia",
-      stayTitle: "Todo para una estancia de verano facil",
+      stayTitle: "Todo para una estancia facil",
       stayText:
-        "Espacios interiores comodos, rincones soleados y detalles practicos para familias y amigos.",
+        "Espacios interiores comodos, rincones soleados y detalles practicos para vacaciones, tiempo en familia y estancias mas largas.",
       galleryEyebrow: "Galeria",
       galleryTitle: "Vistas reales, sol real",
       galleryText:
@@ -972,6 +989,11 @@ export const copy: Record<Locale, PageCopy> = {
             "Si. Las estancias de 1 semana tienen 5% de descuento, 2 semanas 10% y 1 mes 20%.",
         },
         {
+          question: "El apartamento esta preparado para trabajar desde aqui?",
+          answer:
+            "Si. El apartamento tiene wifi de fibra muy rapido y espacios comodos dentro y fuera, para que los huespedes puedan trabajar desde aqui cuando lo necesiten.",
+        },
+        {
           question: "Hay supermercados cerca?",
           answer:
             "Si. Hay un Lidl nuevo a unos 2 minutos en coche, y mas supermercados y tiendas en el centro de Alhaurin de la Torre a unos 5 minutos.",
@@ -1033,7 +1055,7 @@ export const copy: Record<Locale, PageCopy> = {
       },
       {
         title: "Wifi rapido",
-        text: "Mantente conectado cuando quieras.",
+        text: "Conexion rapida de fibra para planear excursiones, ver contenido y hacer alguna llamada de trabajo.",
         icon: Wifi,
       },
       {
@@ -1136,12 +1158,12 @@ export const pageMeta: Record<
     home: {
       title: "Casa la Sorpresa | Sunny holiday apartment near Malaga",
       description:
-        "A sunny 4-person holiday apartment with pool, terraces and mountain views in Alhaurin de la Torre near Malaga.",
+        "A sunny 4-person holiday apartment with pool, terraces, fast WiFi and mountain views in Alhaurin de la Torre near Malaga.",
     },
     stay: {
       title: "The stay",
       description:
-        "Bedrooms, amenities, pool, terraces and practical guest details for Casa la Sorpresa.",
+        "Bedrooms, amenities, pool, terraces, WiFi and practical guest details for Casa la Sorpresa.",
     },
     gallery: {
       title: "Gallery",
@@ -1168,11 +1190,11 @@ export const pageMeta: Record<
     home: {
       title: "Casa la Sorpresa | Zonnig vakantieappartement bij Malaga",
       description:
-        "Een zonnig vakantieappartement voor 4 gasten met zwembad, terrassen en bergzicht in Alhaurin de la Torre.",
+        "Een zonnig vakantieappartement voor 4 gasten met zwembad, terrassen, snelle wifi en bergzicht in Alhaurin de la Torre.",
     },
     stay: {
       title: "Verblijf",
-      description: "Kamers, voorzieningen en praktische info.",
+      description: "Kamers, voorzieningen, wifi en praktische info.",
     },
     gallery: {
       title: "Galerij",
@@ -1195,11 +1217,11 @@ export const pageMeta: Record<
     home: {
       title: "Casa la Sorpresa | Apartamento soleado cerca de Malaga",
       description:
-        "Apartamento vacacional para 4 personas con piscina, terrazas y vistas en Alhaurin de la Torre.",
+        "Apartamento vacacional para 4 personas con piscina, terrazas, wifi rapido y vistas en Alhaurin de la Torre.",
     },
     stay: {
       title: "Estancia",
-      description: "Habitaciones, servicios e informacion practica.",
+      description: "Habitaciones, servicios, wifi e informacion practica.",
     },
     gallery: {
       title: "Galeria",
