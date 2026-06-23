@@ -1,5 +1,6 @@
 import { z } from "zod";
 import {
+  extraGuestNightlyRate,
   maxGuests,
   minimumStayNights,
   rateSeasons,
@@ -21,18 +22,13 @@ export const bookingRequestSchema = z
     path: ["departure"],
   })
   .refine(
-    (value) => nightsBetween(value.arrival, value.departure) >= minimumStayNights,
+    (value) =>
+      nightsBetween(value.arrival, value.departure) >= minimumStayNights,
     {
       message: `Please choose at least ${minimumStayNights} nights.`,
       path: ["departure"],
     },
   );
-
-export const discountForNights = (nights: number) => {
-  return [...stayDiscounts]
-    .sort((a, b) => b.nights - a.nights)
-    .find((discount) => nights >= discount.nights);
-};
 
 export type BookingRequest = z.infer<typeof bookingRequestSchema>;
 
@@ -42,7 +38,7 @@ export const nightsBetween = (arrival: string, departure: string) => {
   return Math.max(0, Math.round((end - start) / 86_400_000));
 };
 
-export const nightlyRateFor = (arrival: string) => {
+export const baseNightlyRateFor = (arrival: string) => {
   const month = new Date(`${arrival}T00:00:00Z`).getUTCMonth() + 1;
 
   if (month >= 6 && month <= 9) return rateSeasons[1].nightly;
@@ -51,16 +47,31 @@ export const nightlyRateFor = (arrival: string) => {
   return rateSeasons[2].nightly;
 };
 
-export const quoteStay = (arrival: string, departure: string) => {
+export const nightlyRateFor = (arrival: string, guests: number) => {
+  const extraGuests = Math.max(0, guests - 2);
+  return baseNightlyRateFor(arrival) + extraGuests * extraGuestNightlyRate;
+};
+
+export const discountForNights = (nights: number) => {
+  return [...stayDiscounts]
+    .sort((a, b) => b.nights - a.nights)
+    .find((discount) => nights >= discount.nights);
+};
+
+export const quoteStay = (
+  arrival: string,
+  departure: string,
+  guests: number,
+) => {
   const nights = nightsBetween(arrival, departure);
-  const nightlyRate = nightlyRateFor(arrival);
+  const nightlyRate = nightlyRateFor(arrival, guests);
   const subtotal = nights * nightlyRate;
   const discount = discountForNights(nights);
   const discountAmount = discount
     ? Math.round(subtotal * (discount.percent / 100))
     : 0;
   const total = subtotal - discountAmount;
-  const deposit = Math.max(150, Math.round(total * 0.25));
+  const deposit = Math.round(total * 0.5);
 
   return {
     nights,

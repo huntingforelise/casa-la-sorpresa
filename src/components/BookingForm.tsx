@@ -7,6 +7,7 @@ import type { Locale } from "@/lib/i18n";
 
 type BookingFormProps = {
   locale: Locale;
+  variant?: "default" | "compact";
 };
 
 type FormState = {
@@ -19,11 +20,19 @@ type FormState = {
 };
 
 const today = new Date().toISOString().slice(0, 10);
-const fieldClass =
-  "rounded-2xl border border-border bg-cream px-4 py-3 text-foreground caret-foreground placeholder:text-muted [color-scheme:light]";
+const fieldClass = {
+  default:
+    "rounded-2xl border border-border bg-cream px-4 py-3 text-foreground caret-foreground placeholder:text-muted [color-scheme:light]",
+  compact:
+    "rounded-xl border border-border bg-cream px-3.5 py-2.5 text-sm text-foreground caret-foreground placeholder:text-muted [color-scheme:light]",
+};
 
-export const BookingForm = ({ locale }: BookingFormProps) => {
+export const BookingForm = ({
+  locale,
+  variant = "default",
+}: BookingFormProps) => {
   const t = copy[locale].booking;
+  const isCompact = variant === "compact";
   const [form, setForm] = useState<FormState>({
     arrival: "",
     departure: "",
@@ -69,7 +78,11 @@ export const BookingForm = ({ locale }: BookingFormProps) => {
   return (
     <form
       onSubmit={submit}
-      className="organic-card grid gap-5 rounded-[2rem] p-5 md:p-7"
+      className={
+        isCompact
+          ? "organic-card grid gap-4 rounded-[1.5rem] p-5 md:p-6"
+          : "organic-card grid gap-5 rounded-[2rem] p-5 md:p-7"
+      }
     >
       <div>
         <p className="inline-flex items-center gap-2 rounded-full bg-pool/18 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-pool-deep">
@@ -80,7 +93,7 @@ export const BookingForm = ({ locale }: BookingFormProps) => {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="grid gap-2 text-sm font-bold">
+        <label className="grid gap-1.5 text-sm font-bold">
           {t.arrival}
           <input
             required
@@ -88,10 +101,10 @@ export const BookingForm = ({ locale }: BookingFormProps) => {
             type="date"
             value={form.arrival}
             onChange={(event) => update("arrival", event.target.value)}
-            className={fieldClass}
+            className={fieldClass[variant]}
           />
         </label>
-        <label className="grid gap-2 text-sm font-bold">
+        <label className="grid gap-1.5 text-sm font-bold">
           {t.departure}
           <input
             required
@@ -99,18 +112,18 @@ export const BookingForm = ({ locale }: BookingFormProps) => {
             type="date"
             value={form.departure}
             onChange={(event) => update("departure", event.target.value)}
-            className={fieldClass}
+            className={fieldClass[variant]}
           />
         </label>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-[0.7fr_1fr]">
-        <label className="grid gap-2 text-sm font-bold">
+        <label className="grid gap-1.5 text-sm font-bold">
           {t.guests}
           <select
             value={form.guests}
             onChange={(event) => update("guests", event.target.value)}
-            className={fieldClass}
+            className={fieldClass[variant]}
           >
             {Array.from({ length: maxGuests }, (_, index) => index + 1).map(
               (guestCount) => (
@@ -121,39 +134,43 @@ export const BookingForm = ({ locale }: BookingFormProps) => {
             )}
           </select>
         </label>
-        <label className="grid gap-2 text-sm font-bold">
+        <label className="grid gap-1.5 text-sm font-bold">
           {t.name}
           <input
             required
             value={form.name}
             onChange={(event) => update("name", event.target.value)}
-            className={fieldClass}
+            className={fieldClass[variant]}
           />
         </label>
       </div>
 
-      <label className="grid gap-2 text-sm font-bold">
+      <label className="grid gap-1.5 text-sm font-bold">
         {t.email}
         <input
           required
           type="email"
           value={form.email}
           onChange={(event) => update("email", event.target.value)}
-          className={fieldClass}
+          className={fieldClass[variant]}
         />
       </label>
 
-      <label className="grid gap-2 text-sm font-bold">
+      <label className="grid gap-1.5 text-sm font-bold">
         {t.notes}
         <textarea
           value={form.notes}
           onChange={(event) => update("notes", event.target.value)}
-          rows={4}
-          className={`${fieldClass} resize-none`}
+          rows={isCompact ? 3 : 4}
+          className={`${fieldClass[variant]} resize-none`}
         />
       </label>
 
-      <button type="submit" className="cta-primary w-full" disabled={isSubmitting}>
+      <button
+        type="submit"
+        className="cta-primary w-full"
+        disabled={isSubmitting}
+      >
         {isSubmitting ? (
           <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
         ) : null}

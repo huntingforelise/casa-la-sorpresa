@@ -76,6 +76,10 @@ export type PageCopy = {
     title: string;
     items: Array<{ label: string; text: string }>;
   };
+  bookingSummary: {
+    title: string;
+    items: Array<{ label: string; text: string }>;
+  };
   sharedPoolNote: {
     title: string;
     text: string;
@@ -117,7 +121,11 @@ export type PageCopy = {
       icon: IconComponent;
     }>;
   };
-  rateSeasons: Array<{ name: string; months: string; nightly: number }>;
+  rateSeasons: Array<{
+    name: string;
+    months: string;
+    nightly: number;
+  }>;
   areaCallout: string;
   bookingRateSuffix: string;
   bookingNight: string;
@@ -139,6 +147,8 @@ export const registrationNumber = "VFT/MA/43321";
 export const maxGuests = 4;
 
 export const minimumStayNights = 5;
+
+export const extraGuestNightlyRate = 35;
 
 export const stayDiscounts = [
   { nights: 7, label: "1 week", percent: 5 },
@@ -479,7 +489,7 @@ export const copy: Record<Locale, PageCopy> = {
       bookingEyebrow: "Booking",
       bookingTitle: "Reserve sunny dates",
       bookingText:
-        "Pick your dates to start the direct booking flow. In demo mode the form validates locally; with Stripe and Supabase configured, it creates a hold and sends guests to deposit checkout.",
+        "Pick your dates to start the direct booking flow and see the practical stay details at a glance.",
       contactEyebrow: "Contact",
       contactTitle: "Ask us anything",
       contactText:
@@ -492,7 +502,7 @@ export const copy: Record<Locale, PageCopy> = {
     booking: {
       title: "Start a booking",
       intro:
-        "Choose dates and guests. Stays start at 5 nights, and longer stays are discounted automatically.",
+        "Choose dates and guests. Stays start at 5 nights, prices at 2 guests.",
       arrival: "Arrival",
       departure: "Departure",
       guests: "Guests",
@@ -510,8 +520,41 @@ export const copy: Record<Locale, PageCopy> = {
           text: "Casa la Sorpresa has a 5-night minimum stay.",
         },
         {
+          label: "Check-in/out",
+          text: "Check-in is from 3 p.m. and check-out is by 11 a.m. Different times can be discussed.",
+        },
+        {
+          label: "Payment",
+          text: "A 50% deposit is due at the time of booking. The outstanding balance is due 4 weeks before arrival.",
+        },
+        {
+          label: "Extra guests",
+          text: `Seasonal rates are for up to 2 guests. Guests 3 and 4 aged over 12 are charged EUR ${extraGuestNightlyRate} per person per night.`,
+        },
+        {
           label: "Longer stays",
           text: "Longer stays receive automatic discounts: 1 week 5%, 2 weeks 10%, and 1 month 20%.",
+        },
+        {
+          label: "Cancellation",
+          text: "Cancellations must be made in writing or by email. Prior to 1 week before arrival we charge 50% of the reservation amount; on arrival day or no-show we charge 100%.",
+        },
+      ],
+    },
+    bookingSummary: {
+      title: "Rate information",
+      items: [
+        {
+          label: "Minimum stay",
+          text: "5 nights.",
+        },
+        {
+          label: "Discounts",
+          text: "1 week 5%, 2 weeks 10%, 1 month 20%.",
+        },
+        {
+          label: "Extra guests",
+          text: `Guests 3 and 4 aged over 12: EUR ${extraGuestNightlyRate} per person per night.`,
         },
       ],
     },
@@ -534,9 +577,24 @@ export const copy: Record<Locale, PageCopy> = {
           answer: "The minimum stay is 5 nights.",
         },
         {
-          question: "Do you discount longer stays?",
+          question: "How do your rates work?",
+          answer: `Seasonal rates are for up to 2 guests. Guests 3 and 4 aged over 12 are charged EUR ${extraGuestNightlyRate} per person per night. The maximum occupancy is 4 guests.`,
+        },
+        {
+          question: "What time are check-in and check-out?",
           answer:
-            "Yes. Stays of 1 week receive 5% off, 2 weeks receive 10% off, and 1 month receives 20% off.",
+            "Check-in is from 3 p.m. and check-out is by 11 a.m. Different times can be discussed with us.",
+        },
+        {
+          question:
+            "Is the apartment suitable for babies, toddlers or wheelchair users?",
+          answer:
+            "Baby and toddler facilities are available on request. The apartment is not wheelchair accessible.",
+        },
+        {
+          question: "Are there house rules?",
+          answer:
+            "Yes. Please do not cause noise disturbance after 11 p.m., dispose of waste in the correct containers, do not smoke inside, and do not let third parties use the apartment without permission.",
         },
         {
           question: "Is the apartment set up to work from here?",
@@ -552,11 +610,6 @@ export const copy: Record<Locale, PageCopy> = {
           question: "Are there supermarkets nearby?",
           answer:
             "Yes. There is a brand-new Lidl around 2 minutes away by car, and more supermarkets and shops in the centre of Alhaurin de la Torre about 5 minutes away.",
-        },
-        {
-          question: "Can we ask a question before booking?",
-          answer:
-            "Yes. Send your dates, group size and any arrival notes, and we will help you choose the best next step.",
         },
       ],
     },
@@ -667,7 +720,7 @@ export const copy: Record<Locale, PageCopy> = {
       bookingEyebrow: "Boeken",
       bookingTitle: "Reserveer zonnige data",
       bookingText:
-        "Kies je data om de directe boeking te starten. In demomodus valideert het formulier lokaal; met Stripe en Supabase maakt het een tijdelijke reservering aan en stuurt het gasten naar de aanbetaling.",
+        "Kies je data om de directe boeking te starten en bekijk de praktische verblijfsdetails in een oogopslag.",
       contactEyebrow: "Contact",
       contactTitle: "Vraag ons alles",
       contactText:
@@ -680,7 +733,7 @@ export const copy: Record<Locale, PageCopy> = {
     booking: {
       title: "Start je boeking",
       intro:
-        "Kies data en gasten. Verblijven starten vanaf 5 nachten en langere verblijven krijgen automatisch korting.",
+        "Kies data en gasten. Verblijven starten vanaf 5 nachten, prijzen op basis van 2 gasten.",
       arrival: "Aankomst",
       departure: "Vertrek",
       guests: "Gasten",
@@ -698,8 +751,41 @@ export const copy: Record<Locale, PageCopy> = {
           text: "Casa la Sorpresa heeft een minimumverblijf van 5 nachten.",
         },
         {
+          label: "In- en uitchecken",
+          text: "Inchecken kan vanaf 15.00 uur en uitchecken kan tot 11.00 uur. Andere tijden kunnen in overleg.",
+        },
+        {
+          label: "Betaling",
+          text: "Een aanbetaling van 50% is verschuldigd op het moment van boeken. Het openstaande bedrag is 4 weken voor aankomst verschuldigd.",
+        },
+        {
+          label: "Extra gasten",
+          text: `Seizoenstarieven gelden tot 2 gasten. Gast 3 en 4 ouder dan 12 jaar betalen EUR ${extraGuestNightlyRate} per persoon per nacht.`,
+        },
+        {
           label: "Langere verblijven",
           text: "Langere verblijven krijgen automatisch korting: 1 week 5%, 2 weken 10% en 1 maand 20%.",
+        },
+        {
+          label: "Annulering",
+          text: "Annuleren kan alleen schriftelijk of per e-mail. Tot 1 week voor aankomst rekenen we 50% van het reserveringsbedrag; op de aankomstdag of bij no-show rekenen we 100%.",
+        },
+      ],
+    },
+    bookingSummary: {
+      title: "Tarieven",
+      items: [
+        {
+          label: "Minimumverblijf",
+          text: "5 nachten.",
+        },
+        {
+          label: "Kortingen",
+          text: "1 week 5%, 2 weken 10%, 1 maand 20%.",
+        },
+        {
+          label: "Extra gasten",
+          text: `Gast 3 en 4 ouder dan 12 jaar: EUR ${extraGuestNightlyRate} per persoon per nacht.`,
         },
       ],
     },
@@ -723,9 +809,24 @@ export const copy: Record<Locale, PageCopy> = {
           answer: "Het minimumverblijf is 5 nachten.",
         },
         {
-          question: "Krijgen langere verblijven korting?",
+          question: "Hoe werken de tarieven?",
+          answer: `Seizoenstarieven gelden tot 2 gasten. Gast 3 en 4 ouder dan 12 jaar betalen EUR ${extraGuestNightlyRate} per persoon per nacht. De maximale bezetting is 4 gasten.`,
+        },
+        {
+          question: "Wat zijn de in- en uitchecktijden?",
           answer:
-            "Ja. Verblijven van 1 week krijgen 5% korting, 2 weken 10% en 1 maand 20%.",
+            "Inchecken kan vanaf 15.00 uur en uitchecken kan tot 11.00 uur. Andere tijden kunnen met ons besproken worden.",
+        },
+        {
+          question:
+            "Is het appartement geschikt voor baby's, peuters of rolstoelgebruikers?",
+          answer:
+            "Voorzieningen voor baby's en peuters zijn beschikbaar op aanvraag. Het appartement is niet rolstoeltoegankelijk.",
+        },
+        {
+          question: "Zijn er huisregels?",
+          answer:
+            "Ja. Veroorzaak geen geluidsoverlast na 23.00 uur, deponeer afval in de juiste containers, rook niet binnen en laat derden het appartement niet gebruiken zonder toestemming.",
         },
         {
           question: "Is het appartement geschikt om van hieruit te werken?",
@@ -938,7 +1039,7 @@ export const copy: Record<Locale, PageCopy> = {
       bookingEyebrow: "Reservar",
       bookingTitle: "Reserva fechas soleadas",
       bookingText:
-        "Elige tus fechas para iniciar la reserva directa. En modo demo el formulario valida localmente; con Stripe y Supabase crea una reserva temporal y envia a los huespedes al pago del deposito.",
+        "Elige tus fechas para iniciar la reserva directa y consulta los detalles practicos de la estancia de un vistazo.",
       contactEyebrow: "Contacto",
       contactTitle: "Preguntanos lo que quieras",
       contactText:
@@ -951,7 +1052,7 @@ export const copy: Record<Locale, PageCopy> = {
     booking: {
       title: "Iniciar reserva",
       intro:
-        "Elige fechas y huespedes. Las estancias empiezan en 5 noches y las estancias largas tienen descuento automatico.",
+        "Elige fechas y huespedes. Las estancias empiezan en 5 noches, precios para 2 huespedes.",
       arrival: "Llegada",
       departure: "Salida",
       guests: "Huespedes",
@@ -969,8 +1070,41 @@ export const copy: Record<Locale, PageCopy> = {
           text: "Casa la Sorpresa tiene una estancia minima de 5 noches.",
         },
         {
+          label: "Check-in/out",
+          text: "El check-in es desde las 15:00 y el check-out hasta las 11:00. Otros horarios se pueden consultar.",
+        },
+        {
+          label: "Pago",
+          text: "Se debe pagar un deposito del 50% en el momento de la reserva. El importe restante vence 4 semanas antes de la llegada.",
+        },
+        {
+          label: "Huespedes extra",
+          text: `Las tarifas de temporada son para hasta 2 huespedes. Los huespedes 3 y 4 mayores de 12 anos pagan EUR ${extraGuestNightlyRate} por persona y noche.`,
+        },
+        {
           label: "Estancias largas",
           text: "Las estancias largas tienen descuentos automaticos: 1 semana 5%, 2 semanas 10% y 1 mes 20%.",
+        },
+        {
+          label: "Cancelacion",
+          text: "Las cancelaciones deben hacerse por escrito o por email. Hasta 1 semana antes de la llegada cobramos el 50% del importe de la reserva; el dia de llegada o no-show cobramos el 100%.",
+        },
+      ],
+    },
+    bookingSummary: {
+      title: "Tarifas",
+      items: [
+        {
+          label: "Estancia minima",
+          text: "5 noches.",
+        },
+        {
+          label: "Descuentos",
+          text: "1 semana 5%, 2 semanas 10%, 1 mes 20%.",
+        },
+        {
+          label: "Huespedes extra",
+          text: `Huespedes 3 y 4 mayores de 12 anos: EUR ${extraGuestNightlyRate} por persona y noche.`,
         },
       ],
     },
@@ -994,9 +1128,24 @@ export const copy: Record<Locale, PageCopy> = {
           answer: "La estancia minima es de 5 noches.",
         },
         {
-          question: "Hay descuentos para estancias largas?",
+          question: "Como funcionan las tarifas?",
+          answer: `Las tarifas de temporada son para hasta 2 huespedes. Los huespedes 3 y 4 mayores de 12 anos pagan EUR ${extraGuestNightlyRate} por persona y noche. La ocupacion maxima es de 4 huespedes.`,
+        },
+        {
+          question: "Cuales son los horarios de check-in y check-out?",
           answer:
-            "Si. Las estancias de 1 semana tienen 5% de descuento, 2 semanas 10% y 1 mes 20%.",
+            "El check-in es desde las 15:00 y el check-out hasta las 11:00. Otros horarios se pueden consultar con nosotros.",
+        },
+        {
+          question:
+            "El apartamento es apto para bebes, ninos pequenos o usuarios de silla de ruedas?",
+          answer:
+            "Hay instalaciones para bebes y ninos pequenos disponibles bajo peticion. El apartamento no es accesible para sillas de ruedas.",
+        },
+        {
+          question: "Hay normas de la casa?",
+          answer:
+            "Si. No causes molestias por ruido despues de las 23:00, deposita la basura en los contenedores adecuados, no fumes dentro y no permitas que terceros usen el apartamento sin permiso.",
         },
         {
           question: "El apartamento esta preparado para trabajar desde aqui?",

@@ -248,10 +248,13 @@ const LocaleHome = async ({ params }: PageProps) => {
             </p>
             <div className="mt-8 grid gap-3">
               <div className="rounded-3xl border border-cream/14 bg-cream/10 px-5 py-4">
-                <p className="font-black">{t.bookingPolicies.title}</p>
-                <div className="mt-3 grid gap-3">
-                  {t.bookingPolicies.items.map((item) => (
-                    <p key={item.label} className="text-sm leading-6 text-cream/72">
+                <p className="font-black">{t.bookingSummary.title}</p>
+                <div className="mt-3 grid gap-2">
+                  {t.bookingSummary.items.map((item) => (
+                    <p
+                      key={item.label}
+                      className="text-sm leading-6 text-cream/72"
+                    >
                       <span className="font-black text-cream">
                         {item.label}:
                       </span>{" "}
@@ -271,7 +274,7 @@ const LocaleHome = async ({ params }: PageProps) => {
                   </div>
                   <p className="flex items-center gap-1 font-black text-sun">
                     <Euro className="h-4 w-4" aria-hidden="true" />
-                    {season.nightly}
+                    {season.nightly}/{t.bookingNight}
                   </p>
                 </div>
               ))}

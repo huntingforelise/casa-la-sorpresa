@@ -15,7 +15,7 @@ export const POST = async (request: Request) => {
   }
 
   const booking = parsed.data;
-  const quote = quoteStay(booking.arrival, booking.departure);
+  const quote = quoteStay(booking.arrival, booking.departure, booking.guests);
 
   const supabase = getSupabaseAdmin();
   const stripe = getStripe();
