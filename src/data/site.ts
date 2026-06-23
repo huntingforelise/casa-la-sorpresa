@@ -483,7 +483,7 @@ export const copy: Record<Locale, PageCopy> = {
       contactEyebrow: "Contact",
       contactTitle: "Ask us anything",
       contactText:
-        "Questions about dates, longer stays, accessibility, arrival times or the future handover? Send a note.",
+        "Questions about dates, longer stays, accessibility, arrival times or check-in details? Send a note.",
       detailsEyebrow: "Still deciding?",
       detailsTitle: "Ask a quick question before you book",
       detailsText:
