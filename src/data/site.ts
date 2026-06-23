@@ -155,8 +155,8 @@ export const contact = {
 };
 
 export const heroImage = {
-  src: "https://static.wixstatic.com/media/e5e27a_39a46ba873ff4f488fdbabeec6f31e69~mv2.jpg",
-  alt: "Casa la Sorpresa pool with mountain views",
+  src: "https://static.wixstatic.com/media/e5e27a_cbda9ac16a2b4197bd3f72b1871c4421~mv2.jpg",
+  alt: "Wide mountain view from Casa la Sorpresa",
 };
 
 export const galleryImages = [

@@ -60,7 +60,7 @@ export const PageHero = ({ locale }: { locale: Locale }) => {
               width={1400}
               height={1000}
               priority
-              className="aspect-[4/3] h-full w-full object-cover"
+              className="aspect-[4/3] h-full w-full object-cover object-[66%_center]"
             />
           </div>
         </div>
