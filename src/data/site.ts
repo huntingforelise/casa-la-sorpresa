@@ -107,6 +107,16 @@ export type PageCopy = {
     text: string;
     icon: IconComponent;
   }>;
+  areaFacilities: {
+    eyebrow: string;
+    title: string;
+    text: string;
+    items: Array<{
+      title: string;
+      text: string;
+      icon: IconComponent;
+    }>;
+  };
   rateSeasons: Array<{ name: string; months: string; nightly: number }>;
   areaCallout: string;
   bookingRateSuffix: string;
@@ -460,7 +470,7 @@ export const copy: Record<Locale, PageCopy> = {
       areaEyebrow: "Area",
       areaTitle: "Close to Malaga, beaches and white villages",
       areaText:
-        "A calm base in Alhaurin de la Torre with easy routes to Malaga, beaches, white villages and airport transfers.",
+        "Our apartment is in the quiet residential area of Pinos de Alhaurin, on the outskirts of lively Alhaurin de la Torre, with easy routes to Malaga, beaches, white villages and the airport.",
       bookingEyebrow: "Booking",
       bookingTitle: "Reserve sunny dates",
       bookingText:
@@ -524,6 +534,11 @@ export const copy: Record<Locale, PageCopy> = {
             "Yes. Stays of 1 week receive 5% off, 2 weeks receive 10% off, and 1 month receives 20% off.",
         },
         {
+          question: "Are there supermarkets nearby?",
+          answer:
+            "Yes. There is a brand-new Lidl around 2 minutes away by car, and more supermarkets and shops in the centre of Alhaurin de la Torre about 5 minutes away.",
+        },
+        {
           question: "Can we ask a question before booking?",
           answer:
             "Yes. Send your dates, group size and any arrival notes, and we will help you choose the best next step.",
@@ -555,9 +570,31 @@ export const copy: Record<Locale, PageCopy> = {
     amenities,
     stayDetails,
     attractions,
+    areaFacilities: {
+      eyebrow: "Facilities",
+      title: "Everyday essentials nearby",
+      text: "Quiet residential surroundings, simple groceries and town amenities are all close enough to keep arrival days and longer stays easy.",
+      items: [
+        {
+          title: "Brand-new Lidl",
+          text: "A handy new Lidl supermarket is around 2 minutes away by car for quick groceries and arrival-day supplies.",
+          icon: Car,
+        },
+        {
+          title: "Town centre",
+          text: "The centre of Alhaurin de la Torre is about 5 minutes away by car for groceries, shops, Spanish restaurants, coffee bars and cafes.",
+          icon: Sparkles,
+        },
+        {
+          title: "Easy by car",
+          text: "Free parking at the apartment makes supermarket runs, beach days and day trips straightforward.",
+          icon: Car,
+        },
+      ],
+    },
     rateSeasons,
     areaCallout:
-      "Alhaurin de la Torre gives guests the useful mix: calm evenings, easy airport transfers, and quick access to the coast.",
+      "Pinos de Alhaurin gives guests the useful mix: calm residential evenings, practical facilities nearby, easy airport transfers and plenty of day-trip options.",
     bookingRateSuffix: "from EUR",
     bookingNight: "night",
     ownerStory: {
@@ -610,7 +647,7 @@ export const copy: Record<Locale, PageCopy> = {
       areaEyebrow: "Omgeving",
       areaTitle: "Dicht bij Malaga, stranden en witte dorpen",
       areaText:
-        "Gebruik het huis als rustige zonnige uitvalsbasis voor Malaga stad, kustplaatsen, stranden en uitzichtpunten in de bergen.",
+        "Het appartement ligt in de rustige residentiele wijk Pinos de Alhaurin, net buiten levendig Alhaurin de la Torre, met makkelijke routes naar Malaga, stranden, witte dorpen en de luchthaven.",
       bookingEyebrow: "Boeken",
       bookingTitle: "Reserveer zonnige data",
       bookingText:
@@ -673,6 +710,11 @@ export const copy: Record<Locale, PageCopy> = {
           question: "Krijgen langere verblijven korting?",
           answer:
             "Ja. Verblijven van 1 week krijgen 5% korting, 2 weken 10% en 1 maand 20%.",
+        },
+        {
+          question: "Zijn er supermarkten in de buurt?",
+          answer:
+            "Ja. Er is een gloednieuwe Lidl op ongeveer 2 minuten rijden, en in het centrum van Alhaurin de la Torre vind je meer supermarkten en winkels op ongeveer 5 minuten rijden.",
         },
         {
           question: "Kunnen we iets vragen voor we boeken?",
@@ -784,13 +826,35 @@ export const copy: Record<Locale, PageCopy> = {
         icon: Plane,
       },
     ],
+    areaFacilities: {
+      eyebrow: "Faciliteiten",
+      title: "Dagelijkse benodigdheden dichtbij",
+      text: "De rustige residentiele omgeving combineert makkelijk met boodschappen en voorzieningen dichtbij, handig bij aankomst en voor langere verblijven.",
+      items: [
+        {
+          title: "Gloednieuwe Lidl",
+          text: "Een handige nieuwe Lidl-supermarkt ligt op ongeveer 2 minuten rijden voor snelle boodschappen en aankopen bij aankomst.",
+          icon: Car,
+        },
+        {
+          title: "Stadscentrum",
+          text: "Het centrum van Alhaurin de la Torre ligt op ongeveer 5 minuten rijden voor boodschappen, winkels, Spaanse restaurants, koffiebars en cafes.",
+          icon: Sparkles,
+        },
+        {
+          title: "Makkelijk met de auto",
+          text: "Gratis parkeren aan het appartement maakt supermarktbezoekjes, stranddagen en daguitstappen eenvoudig.",
+          icon: Car,
+        },
+      ],
+    },
     rateSeasons: [
       { name: "Lentezon", months: "mrt-mei", nightly: 135 },
       { name: "Zomergloed", months: "jun-sep", nightly: 185 },
       { name: "Gouden rust", months: "okt-feb", nightly: 115 },
     ],
     areaCallout:
-      "Alhaurin de la Torre geeft gasten een handige mix: rustige avonden, makkelijke luchthaventransfers en snelle toegang tot de kust.",
+      "Pinos de Alhaurin geeft gasten een handige mix: rustige avonden in een residentiele buurt, praktische voorzieningen vlakbij, makkelijke luchthaventransfers en veel opties voor daguitstappen.",
     bookingRateSuffix: "vanaf EUR",
     bookingNight: "nacht",
     ownerStory: {
@@ -843,7 +907,7 @@ export const copy: Record<Locale, PageCopy> = {
       areaEyebrow: "Zona",
       areaTitle: "Cerca de Malaga, playas y pueblos blancos",
       areaText:
-        "Usa la casa como una base tranquila y soleada para Malaga ciudad, pueblos costeros, playas y miradores de montana.",
+        "El apartamento esta en la tranquila zona residencial de Pinos de Alhaurin, a las afueras del animado Alhaurin de la Torre, con rutas faciles a Malaga, playas, pueblos blancos y el aeropuerto.",
       bookingEyebrow: "Reservar",
       bookingTitle: "Reserva fechas soleadas",
       bookingText:
@@ -906,6 +970,11 @@ export const copy: Record<Locale, PageCopy> = {
           question: "Hay descuentos para estancias largas?",
           answer:
             "Si. Las estancias de 1 semana tienen 5% de descuento, 2 semanas 10% y 1 mes 20%.",
+        },
+        {
+          question: "Hay supermercados cerca?",
+          answer:
+            "Si. Hay un Lidl nuevo a unos 2 minutos en coche, y mas supermercados y tiendas en el centro de Alhaurin de la Torre a unos 5 minutos.",
         },
         {
           question: "Podemos hacer una pregunta antes de reservar?",
@@ -1017,13 +1086,35 @@ export const copy: Record<Locale, PageCopy> = {
         icon: Plane,
       },
     ],
+    areaFacilities: {
+      eyebrow: "Servicios",
+      title: "Lo esencial del dia a dia cerca",
+      text: "El entorno residencial tranquilo se combina con compras y servicios cercanos, comodo al llegar y para estancias mas largas.",
+      items: [
+        {
+          title: "Lidl nuevo",
+          text: "Un Lidl nuevo y practico esta a unos 2 minutos en coche para compras rapidas y lo necesario al llegar.",
+          icon: Car,
+        },
+        {
+          title: "Centro del pueblo",
+          text: "El centro de Alhaurin de la Torre esta a unos 5 minutos en coche para supermercados, tiendas, restaurantes espanoles, cafeterias y cafes.",
+          icon: Sparkles,
+        },
+        {
+          title: "Facil en coche",
+          text: "El parking gratuito en el apartamento hace sencillas las compras, los dias de playa y las excursiones.",
+          icon: Car,
+        },
+      ],
+    },
     rateSeasons: [
       { name: "Sol de primavera", months: "mar-may", nightly: 135 },
       { name: "Brillo de verano", months: "jun-sep", nightly: 185 },
       { name: "Calma dorada", months: "oct-feb", nightly: 115 },
     ],
     areaCallout:
-      "Alhaurin de la Torre ofrece una mezcla muy practica: noches tranquilas, traslados faciles al aeropuerto y acceso rapido a la costa.",
+      "Pinos de Alhaurin ofrece una mezcla muy practica: noches tranquilas en una zona residencial, servicios cercanos, traslados faciles al aeropuerto y muchas opciones de excursiones.",
     bookingRateSuffix: "desde EUR",
     bookingNight: "noche",
     ownerStory: {

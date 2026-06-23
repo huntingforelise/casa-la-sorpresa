@@ -44,6 +44,28 @@ const AreaPage = async ({ params }: PageProps) => {
             );
           })}
         </div>
+        <div className="mt-14">
+          <SectionHeading
+            eyebrow={t.areaFacilities.eyebrow}
+            title={t.areaFacilities.title}
+            text={t.areaFacilities.text}
+          />
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {t.areaFacilities.items.map((item) => {
+              const Icon = item.icon;
+              return (
+                <article
+                  key={item.title}
+                  className="rounded-[1.5rem] bg-white p-6 shadow-[0_16px_42px_rgba(85,107,47,0.1)]"
+                >
+                  <Icon className="h-7 w-7 text-citrus" aria-hidden="true" />
+                  <h2 className="mt-4 text-xl font-black">{item.title}</h2>
+                  <p className="mt-3 leading-7 text-muted">{item.text}</p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {areaImages.map((image) => (
             <div
