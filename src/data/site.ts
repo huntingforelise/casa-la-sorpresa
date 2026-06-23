@@ -135,7 +135,9 @@ export const stayDiscounts = [
 export const contact = {
   email: "hello@casalasorpresa.com",
   phone: "+34 000 000 000",
-  location: "Alhaurin de la Torre, Malaga, Spain",
+  location: "Pinos de Alhaurin, Malaga, Spain",
+  mapQuery:
+    "Casa La Sorpresa, Pinos de Alhaurin, Alhaurin de la Torre, Malaga, Spain",
 };
 
 export const heroImage = {
@@ -647,7 +649,8 @@ export const copy: Record<Locale, PageCopy> = {
     faq: {
       eyebrow: "FAQ",
       title: "Goed om te weten",
-      intro: "Een paar praktische details die gasten vaak graag duidelijk hebben voor ze boeken.",
+      intro:
+        "Een paar praktische details die gasten vaak graag duidelijk hebben voor ze boeken.",
       items: [
         {
           question: "Is het zwembad prive?",
@@ -875,7 +878,8 @@ export const copy: Record<Locale, PageCopy> = {
     faq: {
       eyebrow: "FAQ",
       title: "Conviene saber",
-      intro: "Algunos detalles practicos que los huespedes suelen querer claros antes de reservar.",
+      intro:
+        "Algunos detalles practicos que los huespedes suelen querer claros antes de reservar.",
       items: [
         {
           question: "La piscina es privada?",

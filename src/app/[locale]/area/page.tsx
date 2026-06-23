@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { MapPin } from "lucide-react";
+import { LocationMap } from "@/components/LocationMap";
 import { SectionHeading } from "@/components/SectionHeading";
 import { areaImages, copy, pageMeta } from "@/data/site";
 import { isLocale, type Locale } from "@/lib/i18n";
@@ -59,11 +60,14 @@ const AreaPage = async ({ params }: PageProps) => {
             </div>
           ))}
         </div>
-        <div className="mt-10 rounded-[2rem] bg-pool-deep p-7 text-cream">
-          <MapPin className="h-7 w-7 text-sun" aria-hidden="true" />
-          <p className="mt-4 max-w-3xl text-xl font-black">
-            {t.areaCallout}
-          </p>
+        <div className="mt-10 grid gap-5 lg:grid-cols-[0.85fr_1.15fr] lg:items-stretch">
+          <div className="rounded-[2rem] bg-pool-deep p-7 text-cream">
+            <MapPin className="h-7 w-7 text-sun" aria-hidden="true" />
+            <p className="mt-4 max-w-3xl text-xl font-black">
+              {t.areaCallout}
+            </p>
+          </div>
+          <LocationMap />
         </div>
       </div>
     </section>

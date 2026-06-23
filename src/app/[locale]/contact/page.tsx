@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Mail, Phone } from "lucide-react";
+import { LocationMap } from "@/components/LocationMap";
 import { SectionHeading } from "@/components/SectionHeading";
 import { contact, copy, pageMeta } from "@/data/site";
 import { isLocale, type Locale } from "@/lib/i18n";
@@ -44,6 +45,7 @@ const ContactPage = async ({ params }: PageProps) => {
               {t.ownerStory.text}
             </p>
           </div>
+          <LocationMap />
         </div>
       </div>
     </section>
