@@ -544,6 +544,11 @@ export const copy: Record<Locale, PageCopy> = {
             "Yes. The apartment has very fast fibre WiFi and comfortable indoor and outdoor spots, so guests can work from here when they need to.",
         },
         {
+          question: "Is there noise from airplanes?",
+          answer:
+            "No. Casa la Sorpresa is close to Malaga Airport for easy arrivals, but it is not on the flight route.",
+        },
+        {
           question: "Are there supermarkets nearby?",
           answer:
             "Yes. There is a brand-new Lidl around 2 minutes away by car, and more supermarkets and shops in the centre of Alhaurin de la Torre about 5 minutes away.",
@@ -726,6 +731,11 @@ export const copy: Record<Locale, PageCopy> = {
           question: "Is het appartement geschikt om van hieruit te werken?",
           answer:
             "Ja. Het appartement heeft erg snelle glasvezelwifi en comfortabele plekken binnen en buiten, zodat gasten van hieruit kunnen werken wanneer dat nodig is.",
+        },
+        {
+          question: "Is er lawaai van vliegtuigen?",
+          answer:
+            "Nee. Casa la Sorpresa ligt dicht bij de luchthaven van Malaga voor makkelijke aankomst, maar niet op de vliegroute.",
         },
         {
           question: "Zijn er supermarkten in de buurt?",
@@ -992,6 +1002,11 @@ export const copy: Record<Locale, PageCopy> = {
           question: "El apartamento esta preparado para trabajar desde aqui?",
           answer:
             "Si. El apartamento tiene wifi de fibra muy rapido y espacios comodos dentro y fuera, para que los huespedes puedan trabajar desde aqui cuando lo necesiten.",
+        },
+        {
+          question: "Hay ruido de aviones?",
+          answer:
+            "No. Casa la Sorpresa esta cerca del aeropuerto de Malaga para llegar facilmente, pero no esta en la ruta de vuelo.",
         },
         {
           question: "Hay supermercados cerca?",
