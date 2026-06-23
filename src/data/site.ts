@@ -328,11 +328,11 @@ export type GalleryImage = (typeof galleryImages)[number];
 // Edit this list to choose which images appear on the homepage.
 // The first 4 appear in the grid; the next 2 appear as larger feature images.
 export const homeGalleryImages = [
-  galleryImages[0],
+  galleryImages[3],
   galleryImages[2],
-  galleryImages[4],
-  galleryImages[6],
-  galleryImages[11],
+  galleryImages[9],
+  galleryImages[7],
+  galleryImages[10],
   galleryImages[17],
 ] satisfies GalleryImage[];
 
