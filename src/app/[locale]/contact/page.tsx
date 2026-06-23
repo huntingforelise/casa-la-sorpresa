@@ -24,7 +24,7 @@ const ContactPage = async ({ params }: PageProps) => {
   return (
     <section className="section-band bg-background px-5 py-16 lg:px-8">
       <span className="shape-sun right-10 top-20 h-32 w-32" />
-      <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
+      <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
         <SectionHeading
           eyebrow={t.sections.contactEyebrow}
           title={t.sections.contactTitle}
@@ -46,26 +46,28 @@ const ContactPage = async ({ params }: PageProps) => {
             <span className="font-black">{contact.phone}</span>
           </div>
         </div>
-        <div className="grid h-full gap-5 rounded-[2rem] bg-sun/35 p-6 sm:grid-cols-[13rem_1fr] sm:items-start lg:block xl:grid">
-          <Image
-            src="/images/owners-elise-julien-noah.jpeg"
-            alt="Elise, Julien and Noah"
-            width={352}
-            height={470}
-            className="aspect-[4/5] w-48 rounded-[1.35rem] border-[6px] border-cream object-cover shadow-[0_14px_34px_rgba(85,107,47,0.16)] sm:w-full lg:mb-5 lg:w-56 xl:mb-0 xl:w-full"
-          />
-          <div>
-            <p className="text-lg font-black">{t.ownerStory.title}</p>
-            <p className="mt-2 leading-7 text-muted">{t.ownerStory.text}</p>
+        <div className="grid gap-6">
+          <div className="grid gap-5 rounded-[2rem] bg-sun/35 p-6 sm:grid-cols-[13rem_1fr] sm:items-start lg:block xl:grid">
+            <Image
+              src="/images/owners-elise-julien-noah.jpeg"
+              alt="Elise, Julien and Noah"
+              width={352}
+              height={470}
+              className="aspect-[4/5] w-48 rounded-[1.35rem] border-[6px] border-cream object-cover shadow-[0_14px_34px_rgba(85,107,47,0.16)] sm:w-full lg:mb-5 lg:w-56 xl:mb-0 xl:w-full"
+            />
+            <div>
+              <p className="text-lg font-black">{t.ownerStory.title}</p>
+              <p className="mt-2 leading-7 text-muted">{t.ownerStory.text}</p>
+            </div>
+          </div>
+          <div className="rounded-[1.5rem] border border-border bg-cream/76 p-5">
+            <p className="text-sm font-black uppercase tracking-[0.18em] text-pool-deep">
+              {t.lagosApartment.title}
+            </p>
+            <p className="mt-2 leading-7 text-muted">{t.lagosApartment.text}</p>
           </div>
         </div>
-        <LocationMap className="h-full" />
-        <div className="rounded-[1.5rem] border border-border bg-cream/76 p-5">
-          <p className="text-sm font-black uppercase tracking-[0.18em] text-pool-deep">
-            {t.lagosApartment.title}
-          </p>
-          <p className="mt-2 leading-7 text-muted">{t.lagosApartment.text}</p>
-        </div>
+        <LocationMap className="h-full min-h-[28rem]" />
       </div>
     </section>
   );
