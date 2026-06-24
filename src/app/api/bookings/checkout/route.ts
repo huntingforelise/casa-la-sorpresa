@@ -50,6 +50,27 @@ export const POST = async (request: Request) => {
     );
   }
 
+  const { data: blocks, error: blockError } = await supabase
+    .from("blocked_dates")
+    .select("id")
+    .lt("arrival", booking.departure)
+    .gt("departure", booking.arrival)
+    .limit(1);
+
+  if (blockError) {
+    return NextResponse.json(
+      { error: "Could not check availability." },
+      { status: 500 },
+    );
+  }
+
+  if (blocks.length > 0) {
+    return NextResponse.json(
+      { error: "Those dates are no longer available." },
+      { status: 409 },
+    );
+  }
+
   const holdExpiresAt = new Date(Date.now() + 30 * 60 * 1000).toISOString();
   const { data: hold, error: holdError } = await supabase
     .from("bookings")
@@ -69,6 +90,13 @@ export const POST = async (request: Request) => {
     })
     .select("id")
     .single();
+
+  if (holdError?.code === "23P01" || holdError?.code === "23505") {
+    return NextResponse.json(
+      { error: "Those dates are no longer available." },
+      { status: 409 },
+    );
+  }
 
   if (holdError || !hold) {
     return NextResponse.json(
