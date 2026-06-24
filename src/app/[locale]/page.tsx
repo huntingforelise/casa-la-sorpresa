@@ -22,6 +22,7 @@ import {
   registrationNumber,
   siteUrl,
 } from "@/data/site";
+import { bookingsEnabled, bookingsPausedMessage } from "@/lib/booking-config";
 import { isLocale, localizedPath, type Locale } from "@/lib/i18n";
 
 type PageProps = {
@@ -273,7 +274,13 @@ const LocaleHome = async ({ params }: PageProps) => {
               ) : null}
             </div>
           </div>
-          <BookingForm locale={locale} mode="lead" variant="compact" />
+          <BookingForm
+            locale={locale}
+            mode="lead"
+            variant="compact"
+            bookingsEnabled={bookingsEnabled}
+            pausedMessage={bookingsPausedMessage}
+          />
         </div>
       </section>
 

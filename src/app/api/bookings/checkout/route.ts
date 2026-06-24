@@ -1,11 +1,16 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
+import { bookingsEnabled, bookingsPausedMessage } from "@/lib/booking-config";
 import { bookingRequestSchema, quoteStay } from "@/lib/booking";
 import { getStripe } from "@/lib/stripe";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { siteUrl } from "@/data/site";
 
 export const POST = async (request: Request) => {
+  if (!bookingsEnabled) {
+    return NextResponse.json({ error: bookingsPausedMessage }, { status: 403 });
+  }
+
   const parsed = bookingRequestSchema.safeParse(await request.json());
 
   if (!parsed.success) {

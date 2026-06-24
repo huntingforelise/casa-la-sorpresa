@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Info } from "lucide-react";
 import { BookingForm } from "@/components/BookingForm";
 import { copy, pageMeta } from "@/data/site";
+import { bookingsEnabled, bookingsPausedMessage } from "@/lib/booking-config";
 import { isLocale, type Locale } from "@/lib/i18n";
 
 type PageProps = {
@@ -76,6 +77,22 @@ const BookingPage = async ({ params, searchParams }: PageProps) => {
           </div>
         </div>
         <div className="w-full max-w-xl lg:justify-self-end">
+          {!bookingsEnabled ? (
+            <div className="mb-5 rounded-[1.7rem] border border-sun/35 bg-cream px-5 py-5 text-foreground shadow-[0_20px_54px_rgba(255,211,78,0.18)]">
+              <div className="flex items-start gap-3">
+                <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-full bg-sun text-foreground">
+                  <Info className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <div>
+                  <p className="text-xl font-black">Bookings are paused</p>
+                  <p className="mt-1 text-sm font-semibold leading-6 text-muted">
+                    {bookingsPausedMessage} You can still explore prices and
+                    stay details, but deposits are not available yet.
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : null}
           {bookingStatus === "success" ? (
             <div className="mb-5 rounded-[1.7rem] border border-sun/45 bg-sun px-5 py-5 text-foreground shadow-[0_20px_54px_rgba(255,211,78,0.22)]">
               <div className="flex items-start gap-3">
@@ -98,6 +115,8 @@ const BookingPage = async ({ params, searchParams }: PageProps) => {
               departure: firstSearchValue(query.departure),
               guests: firstSearchValue(query.guests),
             }}
+            bookingsEnabled={bookingsEnabled}
+            pausedMessage={bookingsPausedMessage}
           />
         </div>
       </div>

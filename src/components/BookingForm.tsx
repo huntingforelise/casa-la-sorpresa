@@ -23,6 +23,8 @@ type BookingFormProps = {
   mode?: "full" | "lead";
   variant?: "default" | "compact";
   initialValues?: Partial<Pick<FormState, "arrival" | "departure" | "guests">>;
+  bookingsEnabled?: boolean;
+  pausedMessage?: string;
 };
 
 type FormState = {
@@ -69,6 +71,8 @@ export const BookingForm = ({
   mode = "full",
   variant = "default",
   initialValues,
+  bookingsEnabled = true,
+  pausedMessage,
 }: BookingFormProps) => {
   const router = useRouter();
   const localeCopy = copy[locale];
@@ -126,7 +130,7 @@ export const BookingForm = ({
       }),
     [locale],
   );
-  const canSubmit = Boolean(quote) && !isSubmitting;
+  const canSubmit = Boolean(quote) && !isSubmitting && bookingsEnabled;
   const canLeadSubmit = hasChronologicalDates && !isSubmitting;
   const leadFormClass =
     "organic-card grid auto-rows-max content-start gap-4 self-start rounded-[1.35rem] p-5 text-foreground md:p-6";
@@ -140,6 +144,11 @@ export const BookingForm = ({
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isLeadMode) {
+      if (!bookingsEnabled) {
+        if (!pausedMessage) setMessage("Bookings are not open yet.");
+        return;
+      }
+
       if (!hasChronologicalDates) {
         setMessage(t.quotePrompt);
         return;
@@ -157,6 +166,11 @@ export const BookingForm = ({
 
     if (!quote) {
       setMessage(t.quotePrompt);
+      return;
+    }
+
+    if (!bookingsEnabled) {
+      setMessage(pausedMessage ?? "Bookings are not open yet.");
       return;
     }
 
@@ -291,6 +305,12 @@ export const BookingForm = ({
 
       {isLeadMode ? (
         <>
+          {!bookingsEnabled && pausedMessage ? (
+            <p className="rounded-2xl bg-sun/28 px-4 py-3 text-sm font-semibold leading-6 text-foreground">
+              {pausedMessage}
+            </p>
+          ) : null}
+
           {message ? (
             <p className="rounded-2xl bg-sun/28 px-4 py-3 text-sm font-semibold leading-6 text-foreground">
               {message}
@@ -443,6 +463,12 @@ export const BookingForm = ({
             ) : null}
             {t.submit}
           </button>
+
+          {!bookingsEnabled && pausedMessage ? (
+            <p className="rounded-2xl bg-sun/28 px-4 py-3 text-sm font-semibold leading-6 text-foreground">
+              {pausedMessage}
+            </p>
+          ) : null}
 
           {message ? (
             <p className="rounded-2xl bg-sun/28 px-4 py-3 text-sm font-semibold leading-6 text-foreground">

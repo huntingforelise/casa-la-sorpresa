@@ -715,7 +715,7 @@ export const copy: Record<Locale, PageCopy> = {
     ],
     book: "Boek je verblijf",
     common: {
-      brandSubline: "Zon bij Malaga",
+      brandSubline: "Zonnig Malaga",
       explore: "Ontdek",
       contact: "Contact",
       registration: "Registratie",
