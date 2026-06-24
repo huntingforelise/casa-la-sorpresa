@@ -53,26 +53,35 @@ export const BookingForm = ({
     setIsSubmitting(true);
     setMessage("");
 
-    const response = await fetch("/api/bookings/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...form, locale, guests: Number(form.guests) }),
-    });
+    try {
+      const response = await fetch("/api/bookings/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, locale, guests: Number(form.guests) }),
+      });
 
-    const payload = (await response.json()) as {
-      url?: string;
-      message?: string;
-      error?: string;
-    };
+      const payload = (await response.json().catch(() => ({}))) as {
+        url?: string;
+        message?: string;
+        error?: string;
+      };
 
-    setIsSubmitting(false);
+      setIsSubmitting(false);
 
-    if (payload.url) {
-      window.location.href = payload.url;
-      return;
+      if (payload.url) {
+        window.location.href = payload.url;
+        return;
+      }
+
+      setMessage(
+        payload.message ??
+          payload.error ??
+          (response.ok ? t.demo : "Could not start checkout. Please try again."),
+      );
+    } catch {
+      setIsSubmitting(false);
+      setMessage("Could not start checkout. Please try again.");
     }
-
-    setMessage(payload.message ?? payload.error ?? t.demo);
   };
 
   return (
