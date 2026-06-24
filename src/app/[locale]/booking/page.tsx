@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CheckCircle2 } from "lucide-react";
 import { BookingForm } from "@/components/BookingForm";
 import { copy, pageMeta } from "@/data/site";
 import { isLocale, type Locale } from "@/lib/i18n";
@@ -25,6 +26,7 @@ const BookingPage = async ({ params, searchParams }: PageProps) => {
   const query = searchParams ? await searchParams : {};
   const locale: Locale = isLocale(rawLocale) ? rawLocale : "en";
   const t = copy[locale];
+  const bookingStatus = firstSearchValue(query.status);
 
   return (
     <section className="bg-pool-deep px-5 py-16 text-cream lg:px-8">
@@ -74,6 +76,21 @@ const BookingPage = async ({ params, searchParams }: PageProps) => {
           </div>
         </div>
         <div className="w-full max-w-xl lg:justify-self-end">
+          {bookingStatus === "success" ? (
+            <div className="mb-5 rounded-[1.7rem] border border-sun/45 bg-sun px-5 py-5 text-foreground shadow-[0_20px_54px_rgba(255,211,78,0.22)]">
+              <div className="flex items-start gap-3">
+                <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-full bg-cream text-pool-deep">
+                  <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <div>
+                  <p className="text-xl font-black">{t.booking.successTitle}</p>
+                  <p className="mt-1 text-sm font-semibold leading-6 text-foreground/78">
+                    {t.booking.successText}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : null}
           <BookingForm
             locale={locale}
             initialValues={{

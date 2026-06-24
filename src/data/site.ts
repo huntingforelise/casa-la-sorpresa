@@ -86,6 +86,8 @@ export type PageCopy = {
     balanceAmount: string;
     balanceDue: string;
     selectedDates: string;
+    successTitle: string;
+    successText: string;
   };
   bookingPolicies: {
     title: string;
@@ -545,6 +547,9 @@ export const copy: Record<Locale, PageCopy> = {
       balanceAmount: "Balance due 7 days before arrival",
       balanceDue: "After this date, paid amounts are no longer refundable",
       selectedDates: "Selected dates",
+      successTitle: "Your deposit was received",
+      successText:
+        "Thank you. Your booking request is confirmed, and a confirmation email is on its way.",
     },
     bookingPolicies: {
       title: "Booking notes",
@@ -786,6 +791,9 @@ export const copy: Record<Locale, PageCopy> = {
       balanceDue:
         "Na deze datum zijn betaalde bedragen niet meer terugbetaalbaar",
       selectedDates: "Gekozen data",
+      successTitle: "Je aanbetaling is ontvangen",
+      successText:
+        "Dank je. Je boekingsaanvraag is bevestigd en er is een bevestigingsmail onderweg.",
     },
     bookingPolicies: {
       title: "Boekingsinfo",
@@ -1123,6 +1131,9 @@ export const copy: Record<Locale, PageCopy> = {
       balanceDue:
         "Despues de esta fecha, los importes pagados ya no son reembolsables",
       selectedDates: "Fechas elegidas",
+      successTitle: "Hemos recibido tu deposito",
+      successText:
+        "Gracias. Tu solicitud de reserva esta confirmada y te enviaremos un email de confirmacion.",
     },
     bookingPolicies: {
       title: "Notas de reserva",
