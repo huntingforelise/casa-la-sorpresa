@@ -176,11 +176,16 @@ export const stayDiscounts = [
 ];
 
 export const contact = {
-  email: "hello@casalasorpresa.com",
+  email: "elise@elisebuilds.com",
   phone: "+34 000 000 000",
   location: "Pinos de Alhaurin, Malaga, Spain",
   mapQuery:
     "Casa La Sorpresa, Pinos de Alhaurin, Alhaurin de la Torre, Malaga, Spain",
+};
+
+export const builder = {
+  name: "elisebuilds",
+  url: "https://elisebuilds.com",
 };
 
 export const heroImage = {

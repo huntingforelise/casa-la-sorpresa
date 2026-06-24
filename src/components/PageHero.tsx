@@ -11,19 +11,19 @@ export const PageHero = ({ locale }: { locale: Locale }) => {
   return (
     <section className="section-band sunny-shell">
       <OrganicShapes />
-      <div className="mx-auto grid min-h-[calc(100svh-84px)] max-w-7xl items-center gap-10 px-5 py-10 md:grid-cols-[0.95fr_1.05fr] lg:px-8">
-        <div className="relative z-10 max-w-2xl">
-          <p className="inline-flex items-center gap-2 rounded-full bg-sun/70 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-foreground">
-            <MapPin className="h-4 w-4" aria-hidden="true" />
+      <div className="mx-auto grid min-h-[calc(100svh-65px)] max-w-7xl items-center gap-8 px-4 py-8 sm:px-5 sm:py-10 md:min-h-[calc(100svh-84px)] md:grid-cols-[0.95fr_1.05fr] lg:px-8">
+        <div className="relative z-10 min-w-0 max-w-2xl">
+          <p className="inline-flex max-w-full items-center gap-2 rounded-full bg-sun/70 px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.14em] text-foreground sm:px-4 sm:text-xs sm:tracking-[0.18em]">
+            <MapPin className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" aria-hidden="true" />
             {t.hero.eyebrow}
           </p>
-          <h1 className="mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl lg:text-7xl">
+          <h1 className="mt-5 max-w-full text-balance break-words text-[clamp(2.35rem,10.5vw,3.15rem)] font-black leading-[1] text-foreground sm:mt-6 sm:text-6xl sm:leading-[0.95] lg:text-7xl">
             {t.hero.title}
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-muted">
+          <p className="mt-5 max-w-xl text-base leading-7 text-muted sm:mt-6 sm:text-lg sm:leading-8">
             {t.hero.text}
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-7 grid gap-3 sm:mt-8 sm:flex sm:flex-wrap">
             <Link
               href={localizedPath(locale, "/booking")}
               className="cta-primary"
@@ -38,11 +38,11 @@ export const PageHero = ({ locale }: { locale: Locale }) => {
               {t.hero.secondary}
             </Link>
           </div>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-7 grid grid-cols-2 gap-2 sm:mt-8 sm:flex sm:flex-wrap sm:gap-3">
             {t.highlights.map((item) => (
               <span
                 key={item}
-                className="rounded-full border border-border bg-cream/80 px-4 py-2 text-sm font-bold"
+                className="min-w-0 rounded-full border border-border bg-cream/80 px-3 py-2 text-center text-xs font-bold leading-snug sm:px-4 sm:text-sm"
               >
                 {item}
               </span>

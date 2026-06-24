@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { contact, copy, registrationNumber } from "@/data/site";
+import { builder, contact, copy, registrationNumber } from "@/data/site";
 import { localizedPath, type Locale } from "@/lib/i18n";
 
 export const SiteFooter = ({ locale }: { locale: Locale }) => {
@@ -48,6 +48,17 @@ export const SiteFooter = ({ locale }: { locale: Locale }) => {
             <p>{contact.phone}</p>
             <p>{contact.location}</p>
             <LanguageSwitcher locale={locale} variant="footer" />
+            <p className="pt-2 text-xs">
+              Built by{" "}
+              <a
+                href={builder.url}
+                target="_blank"
+                rel="noreferrer"
+                className="font-bold text-pool-deep transition hover:text-terracotta"
+              >
+                {builder.name}
+              </a>
+            </p>
           </div>
         </div>
       </div>

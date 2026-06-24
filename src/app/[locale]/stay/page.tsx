@@ -23,7 +23,7 @@ const StayPage = async ({ params }: PageProps) => {
   return (
     <>
       <section className="section-band bg-background px-5 py-16 lg:px-8">
-        <span className="shape-sun right-10 top-20 h-32 w-32" />
+        <span className="shape-sun -right-10 top-8 h-32 w-32 sm:right-10 sm:top-20" />
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
             <SectionHeading

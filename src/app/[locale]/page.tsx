@@ -92,15 +92,17 @@ const LocaleHome = async ({ params }: PageProps) => {
       />
       <PageHero locale={locale} />
 
-      <section className="bg-cream px-5 py-12 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="bg-cream px-4 py-7 sm:px-5 sm:py-12 lg:px-8">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-4">
           {t.stats.map((stat) => (
             <div
               key={stat.label}
-              className="rounded-[1.7rem] border border-border bg-background p-6"
+              className="rounded-[1rem] border border-border bg-background p-3.5 sm:rounded-[1.7rem] sm:p-6"
             >
-              <p className="text-4xl font-black text-citrus">{stat.value}</p>
-              <p className="mt-1 text-sm font-bold uppercase tracking-[0.16em] text-muted">
+              <p className="text-2xl font-black leading-none text-citrus sm:text-4xl">
+                {stat.value}
+              </p>
+              <p className="mt-1 text-[0.62rem] font-bold uppercase leading-snug tracking-[0.1em] text-muted sm:text-sm sm:tracking-[0.16em]">
                 {stat.label}
               </p>
             </div>

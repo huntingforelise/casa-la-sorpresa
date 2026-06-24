@@ -19,7 +19,7 @@ const GalleryPage = async ({ params }: PageProps) => {
 
   return (
     <section className="section-band bg-sand/55 px-5 py-16 lg:px-8">
-      <span className="shape-citrus right-8 top-20 h-28 w-28" />
+      <span className="shape-citrus -right-8 top-8 h-28 w-28 sm:right-8 sm:top-20" />
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow={t.sections.galleryEyebrow}

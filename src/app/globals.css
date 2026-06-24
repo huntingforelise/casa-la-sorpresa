@@ -37,10 +37,12 @@
 }
 
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 
 body {
+  overflow-x: clip;
   background: var(--background);
   color: var(--foreground);
   font-family: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
@@ -119,6 +121,21 @@ body {
   transform: translateY(-2px);
   background: var(--terracotta);
   box-shadow: 0 20px 44px rgb(185 81 47 / 0.22);
+}
+
+.header-cta {
+  min-height: 2.5rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.86rem;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .header-cta {
+    min-height: 3rem;
+    padding: 0.8rem 1.25rem;
+    font-size: 0.92rem;
+  }
 }
 
 .cta-secondary {
