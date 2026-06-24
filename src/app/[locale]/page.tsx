@@ -58,6 +58,7 @@ const LocaleHome = async ({ params }: PageProps) => {
   const homeFeatureImages = homeGalleryImages.slice(4, 6);
   const areaGraphicImages = [areaImages[0], areaImages[2], areaImages[10]];
   const contactPromptIcons = [CalendarDays, Clock, MessageCircle];
+  const discountSummary = t.bookingSummary.items[1];
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
@@ -247,22 +248,6 @@ const LocaleHome = async ({ params }: PageProps) => {
               {t.sections.bookingText}
             </p>
             <div className="mt-8 grid gap-3">
-              <div className="rounded-3xl border border-cream/14 bg-cream/10 px-5 py-4">
-                <p className="font-black">{t.bookingSummary.title}</p>
-                <div className="mt-3 grid gap-2">
-                  {t.bookingSummary.items.map((item) => (
-                    <p
-                      key={item.label}
-                      className="text-sm leading-6 text-cream/72"
-                    >
-                      <span className="font-black text-cream">
-                        {item.label}:
-                      </span>{" "}
-                      {item.text}
-                    </p>
-                  ))}
-                </div>
-              </div>
               {t.rateSeasons.map((season) => (
                 <div
                   key={season.name}
@@ -278,9 +263,17 @@ const LocaleHome = async ({ params }: PageProps) => {
                   </p>
                 </div>
               ))}
+              {discountSummary ? (
+                <p className="px-1 text-sm font-semibold leading-6 text-cream/72">
+                  <span className="font-black text-cream">
+                    {discountSummary.label}:
+                  </span>{" "}
+                  {discountSummary.text} Automatically applied.
+                </p>
+              ) : null}
             </div>
           </div>
-          <BookingForm locale={locale} />
+          <BookingForm locale={locale} mode="lead" variant="compact" />
         </div>
       </section>
 

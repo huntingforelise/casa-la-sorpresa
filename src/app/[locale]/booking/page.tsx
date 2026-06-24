@@ -3,7 +3,10 @@ import { BookingForm } from "@/components/BookingForm";
 import { copy, pageMeta } from "@/data/site";
 import { isLocale, type Locale } from "@/lib/i18n";
 
-type PageProps = { params: Promise<{ locale: string }> };
+type PageProps = {
+  params: Promise<{ locale: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 export const generateMetadata = async ({
   params,
@@ -13,8 +16,13 @@ export const generateMetadata = async ({
   return pageMeta[locale].booking;
 };
 
-const BookingPage = async ({ params }: PageProps) => {
+const firstSearchValue = (value: string | string[] | undefined) => {
+  return Array.isArray(value) ? value[0] : value;
+};
+
+const BookingPage = async ({ params, searchParams }: PageProps) => {
   const { locale: rawLocale } = await params;
+  const query = searchParams ? await searchParams : {};
   const locale: Locale = isLocale(rawLocale) ? rawLocale : "en";
   const t = copy[locale];
 
@@ -35,13 +43,14 @@ const BookingPage = async ({ params }: PageProps) => {
             <div className="rounded-3xl border border-cream/14 bg-cream/10 px-5 py-4">
               <p className="font-black">{t.bookingSummary.title}</p>
               <div className="mt-3 grid gap-2">
-                {t.bookingSummary.items.map((item) => (
+                {t.bookingSummary.items.map((item, index) => (
                   <p
                     key={item.label}
                     className="text-sm leading-6 text-cream/72"
                   >
                     <span className="font-black text-cream">{item.label}:</span>{" "}
                     {item.text}
+                    {index === 1 ? " Automatically applied." : null}
                   </p>
                 ))}
               </div>
@@ -65,7 +74,14 @@ const BookingPage = async ({ params }: PageProps) => {
           </div>
         </div>
         <div className="w-full max-w-xl lg:justify-self-end">
-          <BookingForm locale={locale} variant="compact" />
+          <BookingForm
+            locale={locale}
+            initialValues={{
+              arrival: firstSearchValue(query.arrival),
+              departure: firstSearchValue(query.departure),
+              guests: firstSearchValue(query.guests),
+            }}
+          />
         </div>
       </div>
       <div className="mx-auto mt-10 max-w-7xl">

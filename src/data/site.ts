@@ -62,6 +62,7 @@ export type PageCopy = {
   };
   booking: {
     title: string;
+    fullTitle: string;
     intro: string;
     arrival: string;
     departure: string;
@@ -71,6 +72,20 @@ export type PageCopy = {
     notes: string;
     submit: string;
     demo: string;
+    quoteTitle: string;
+    quoteIntro: string;
+    quotePrompt: string;
+    minimumStayWarning: string;
+    nights: string;
+    nightlyRate: string;
+    subtotal: string;
+    discount: string;
+    total: string;
+    depositDue: string;
+    refundableUntil: string;
+    balanceAmount: string;
+    balanceDue: string;
+    selectedDates: string;
   };
   bookingPolicies: {
     title: string;
@@ -147,6 +162,8 @@ export const registrationNumber = "VFT/MA/43321";
 export const maxGuests = 4;
 
 export const minimumStayNights = 5;
+
+export const depositRefundableUntilDays = 7;
 
 export const extraGuestNightlyRate = 35;
 
@@ -437,9 +454,9 @@ export const attractions = [
 ];
 
 export const rateSeasons = [
-  { name: "Spring sunshine", months: "Mar-May", nightly: 135 },
+  { name: "Spring sunshine", months: "Mar-May", nightly: 145 },
   { name: "Summer glow", months: "Jun-Sep", nightly: 185 },
-  { name: "Golden calm", months: "Oct-Feb", nightly: 115 },
+  { name: "Golden calm", months: "Oct-Feb", nightly: 125 },
 ];
 
 export const copy: Record<Locale, PageCopy> = {
@@ -501,6 +518,7 @@ export const copy: Record<Locale, PageCopy> = {
     },
     booking: {
       title: "Start a booking",
+      fullTitle: "Make a booking",
       intro:
         "Choose dates and guests. Stays start at 5 nights, prices at 2 guests.",
       arrival: "Arrival",
@@ -511,6 +529,22 @@ export const copy: Record<Locale, PageCopy> = {
       notes: "Notes",
       submit: "Continue to deposit",
       demo: "Demo mode: add Supabase and Stripe environment variables to activate live deposits.",
+      quoteTitle: "Your stay price",
+      quoteIntro: "This estimate updates from your dates and guest count.",
+      quotePrompt:
+        "Choose arrival and departure dates to see the price before you continue.",
+      minimumStayWarning:
+        "Minimum stay: {minimum} nights. Your selected stay: {selected} nights.",
+      nights: "Nights",
+      nightlyRate: "Nightly rate",
+      subtotal: "Subtotal",
+      discount: "Stay discount",
+      total: "Total stay",
+      depositDue: "Deposit due today",
+      refundableUntil: "Deposit refundable until",
+      balanceAmount: "Balance due 7 days before arrival",
+      balanceDue: "After this date, paid amounts are no longer refundable",
+      selectedDates: "Selected dates",
     },
     bookingPolicies: {
       title: "Booking notes",
@@ -525,7 +559,7 @@ export const copy: Record<Locale, PageCopy> = {
         },
         {
           label: "Payment",
-          text: "A 50% deposit is due at the time of booking. The outstanding balance is due 4 weeks before arrival.",
+          text: "A 50% deposit is due at the time of booking. The remaining 50% is due 7 days before arrival.",
         },
         {
           label: "Extra guests",
@@ -537,7 +571,7 @@ export const copy: Record<Locale, PageCopy> = {
         },
         {
           label: "Cancellation",
-          text: "Cancellations must be made in writing or by email. Prior to 1 week before arrival we charge 50% of the reservation amount; on arrival day or no-show we charge 100%.",
+          text: "Cancellations must be made in writing or by email. The deposit is refundable until 7 days before arrival. From 7 days before arrival, paid amounts are no longer refundable; on arrival day or no-show we charge 100%.",
         },
       ],
     },
@@ -571,14 +605,6 @@ export const copy: Record<Locale, PageCopy> = {
           question: "Is the pool private?",
           answer:
             "The pool is shared with the owners. They will always do their best to respect guests' personal space, but it is a shared outdoor space.",
-        },
-        {
-          question: "What is the minimum stay?",
-          answer: "The minimum stay is 5 nights.",
-        },
-        {
-          question: "How do your rates work?",
-          answer: `Seasonal rates are for up to 2 guests. Guests 3 and 4 aged over 12 are charged EUR ${extraGuestNightlyRate} per person per night. The maximum occupancy is 4 guests.`,
         },
         {
           question: "What time are check-in and check-out?",
@@ -732,6 +758,7 @@ export const copy: Record<Locale, PageCopy> = {
     },
     booking: {
       title: "Start je boeking",
+      fullTitle: "Maak een boeking",
       intro:
         "Kies data en gasten. Verblijven starten vanaf 5 nachten, prijzen op basis van 2 gasten.",
       arrival: "Aankomst",
@@ -742,6 +769,23 @@ export const copy: Record<Locale, PageCopy> = {
       notes: "Opmerkingen",
       submit: "Ga naar aanbetaling",
       demo: "Demomodus: voeg Supabase- en Stripe-omgevingsvariabelen toe voor live betalingen.",
+      quoteTitle: "Prijs van je verblijf",
+      quoteIntro: "Deze schatting past zich aan je data en aantal gasten aan.",
+      quotePrompt:
+        "Kies aankomst- en vertrekdata om de prijs te zien voor je doorgaat.",
+      minimumStayWarning:
+        "Minimumverblijf: {minimum} nachten. Je gekozen verblijf: {selected} nachten.",
+      nights: "Nachten",
+      nightlyRate: "Prijs per nacht",
+      subtotal: "Subtotaal",
+      discount: "Verblijfskorting",
+      total: "Totaal verblijf",
+      depositDue: "Aanbetaling vandaag",
+      refundableUntil: "Aanbetaling terugbetaalbaar tot",
+      balanceAmount: "Saldo verschuldigd 7 dagen voor aankomst",
+      balanceDue:
+        "Na deze datum zijn betaalde bedragen niet meer terugbetaalbaar",
+      selectedDates: "Gekozen data",
     },
     bookingPolicies: {
       title: "Boekingsinfo",
@@ -756,7 +800,7 @@ export const copy: Record<Locale, PageCopy> = {
         },
         {
           label: "Betaling",
-          text: "Een aanbetaling van 50% is verschuldigd op het moment van boeken. Het openstaande bedrag is 4 weken voor aankomst verschuldigd.",
+          text: "Een aanbetaling van 50% is verschuldigd op het moment van boeken. De resterende 50% is 7 dagen voor aankomst verschuldigd.",
         },
         {
           label: "Extra gasten",
@@ -768,7 +812,7 @@ export const copy: Record<Locale, PageCopy> = {
         },
         {
           label: "Annulering",
-          text: "Annuleren kan alleen schriftelijk of per e-mail. Tot 1 week voor aankomst rekenen we 50% van het reserveringsbedrag; op de aankomstdag of bij no-show rekenen we 100%.",
+          text: "Annuleren kan alleen schriftelijk of per e-mail. De aanbetaling is terugbetaalbaar tot 7 dagen voor aankomst. Vanaf 7 dagen voor aankomst zijn betaalde bedragen niet meer terugbetaalbaar; op de aankomstdag of bij no-show rekenen we 100%.",
         },
       ],
     },
@@ -976,9 +1020,9 @@ export const copy: Record<Locale, PageCopy> = {
       ],
     },
     rateSeasons: [
-      { name: "Lentezon", months: "mrt-mei", nightly: 135 },
+      { name: "Lentezon", months: "mrt-mei", nightly: 145 },
       { name: "Zomergloed", months: "jun-sep", nightly: 185 },
-      { name: "Gouden rust", months: "okt-feb", nightly: 115 },
+      { name: "Gouden rust", months: "okt-feb", nightly: 125 },
     ],
     areaCallout:
       "Pinos de Alhaurin geeft gasten een handige mix: rustige avonden in een residentiele buurt, praktische voorzieningen vlakbij, makkelijke luchthaventransfers en veel opties voor daguitstappen.",
@@ -1051,6 +1095,7 @@ export const copy: Record<Locale, PageCopy> = {
     },
     booking: {
       title: "Iniciar reserva",
+      fullTitle: "Haz una reserva",
       intro:
         "Elige fechas y huespedes. Las estancias empiezan en 5 noches, precios para 2 huespedes.",
       arrival: "Llegada",
@@ -1061,6 +1106,23 @@ export const copy: Record<Locale, PageCopy> = {
       notes: "Notas",
       submit: "Continuar al deposito",
       demo: "Modo demo: anade variables de entorno de Supabase y Stripe para activar depositos reales.",
+      quoteTitle: "Precio de tu estancia",
+      quoteIntro: "Esta estimacion se actualiza con tus fechas y huespedes.",
+      quotePrompt:
+        "Elige llegada y salida para ver el precio antes de continuar.",
+      minimumStayWarning:
+        "Estancia minima: {minimum} noches. Estancia elegida: {selected} noches.",
+      nights: "Noches",
+      nightlyRate: "Precio por noche",
+      subtotal: "Subtotal",
+      discount: "Descuento por estancia",
+      total: "Total estancia",
+      depositDue: "Deposito hoy",
+      refundableUntil: "Deposito reembolsable hasta",
+      balanceAmount: "Saldo 7 dias antes de la llegada",
+      balanceDue:
+        "Despues de esta fecha, los importes pagados ya no son reembolsables",
+      selectedDates: "Fechas elegidas",
     },
     bookingPolicies: {
       title: "Notas de reserva",
@@ -1075,7 +1137,7 @@ export const copy: Record<Locale, PageCopy> = {
         },
         {
           label: "Pago",
-          text: "Se debe pagar un deposito del 50% en el momento de la reserva. El importe restante vence 4 semanas antes de la llegada.",
+          text: "Se debe pagar un deposito del 50% en el momento de la reserva. El 50% restante vence 7 dias antes de la llegada.",
         },
         {
           label: "Huespedes extra",
@@ -1087,7 +1149,7 @@ export const copy: Record<Locale, PageCopy> = {
         },
         {
           label: "Cancelacion",
-          text: "Las cancelaciones deben hacerse por escrito o por email. Hasta 1 semana antes de la llegada cobramos el 50% del importe de la reserva; el dia de llegada o no-show cobramos el 100%.",
+          text: "Las cancelaciones deben hacerse por escrito o por email. El deposito es reembolsable hasta 7 dias antes de la llegada. Desde 7 dias antes de la llegada, los importes pagados ya no son reembolsables; el dia de llegada o no-show cobramos el 100%.",
         },
       ],
     },
@@ -1295,9 +1357,9 @@ export const copy: Record<Locale, PageCopy> = {
       ],
     },
     rateSeasons: [
-      { name: "Sol de primavera", months: "mar-may", nightly: 135 },
+      { name: "Sol de primavera", months: "mar-may", nightly: 145 },
       { name: "Brillo de verano", months: "jun-sep", nightly: 185 },
-      { name: "Calma dorada", months: "oct-feb", nightly: 115 },
+      { name: "Calma dorada", months: "oct-feb", nightly: 125 },
     ],
     areaCallout:
       "Pinos de Alhaurin ofrece una mezcla muy practica: noches tranquilas en una zona residencial, servicios cercanos, traslados faciles al aeropuerto y muchas opciones de excursiones.",
