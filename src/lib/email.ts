@@ -86,6 +86,7 @@ Deposit paid: ${deposit}
 
 We will email you separately with any practical arrival details.
 
+Elise, Julien and Noah
 Casa la Sorpresa`;
 
   const ownerText = `A new Casa la Sorpresa booking has been confirmed.
@@ -153,8 +154,8 @@ Booking page: ${bookingUrl}`;
                 </p>
 
                 <div style="margin-top:24px;padding-top:18px;border-top:1px solid rgba(36,49,40,0.12);">
-                  <p style="margin:0;font-size:15px;font-weight:900;color:#243128;">Casa la Sorpresa</p>
-                  <p style="margin:4px 0 0;font-size:13px;color:rgba(36,49,40,0.64);">Malaga sunshine</p>
+                  <p style="margin:0;font-size:15px;font-weight:900;color:#243128;">Elise, Julien and Noah</p>
+                  <p style="margin:4px 0 0;font-size:13px;color:rgba(36,49,40,0.64);">Casa la Sorpresa · Malaga sunshine</p>
                 </div>
               </div>
             </div>
