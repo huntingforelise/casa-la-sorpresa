@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import type Stripe from "stripe";
 import { bookingRequestSchema, quoteStay } from "@/lib/booking";
 import { getStripe } from "@/lib/stripe";
 import { getSupabaseAdmin } from "@/lib/supabase";
@@ -105,35 +106,65 @@ export const POST = async (request: Request) => {
     );
   }
 
-  const session = await stripe.checkout.sessions.create({
-    mode: "payment",
-    customer_email: booking.email,
-    line_items: [
-      {
-        price_data: {
-          currency: quote.currency,
-          product_data: {
-            name: "Casa la Sorpresa reservation deposit",
-            description: `${booking.arrival} to ${booking.departure}, ${quote.nights} nights`,
-          },
-          unit_amount: quote.deposit * 100,
-        },
-        quantity: 1,
-      },
-    ],
-    metadata: {
-      bookingId: String(hold.id),
-      arrival: booking.arrival,
-      departure: booking.departure,
-    },
-    success_url: `${siteUrl}/${booking.locale}/booking?status=success&session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${siteUrl}/${booking.locale}/booking?status=cancelled`,
-  });
+  let session: Stripe.Checkout.Session;
 
-  await supabase
+  try {
+    session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      payment_method_types: ["card", "bancontact"],
+      customer_email: booking.email,
+      line_items: [
+        {
+          price_data: {
+            currency: quote.currency,
+            product_data: {
+              name: "Casa la Sorpresa reservation deposit",
+              description: `${booking.arrival} to ${booking.departure}, ${quote.nights} nights`,
+            },
+            unit_amount: quote.deposit * 100,
+          },
+          quantity: 1,
+        },
+      ],
+      metadata: {
+        bookingId: String(hold.id),
+        arrival: booking.arrival,
+        departure: booking.departure,
+      },
+      success_url: `${siteUrl}/${booking.locale}/booking?status=success&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${siteUrl}/${booking.locale}/booking?status=cancelled`,
+    });
+  } catch (error) {
+    console.error("Stripe Checkout session creation failed", error);
+
+    await supabase
+      .from("bookings")
+      .update({ status: "expired" })
+      .eq("id", hold.id)
+      .eq("status", "hold");
+
+    return NextResponse.json(
+      { error: "Could not start Stripe checkout." },
+      { status: 502 },
+    );
+  }
+
+  const { error: sessionUpdateError } = await supabase
     .from("bookings")
     .update({ stripe_session_id: session.id })
     .eq("id", hold.id);
+
+  if (sessionUpdateError) {
+    console.error("Could not store Stripe Checkout session on booking", {
+      bookingId: hold.id,
+      error: sessionUpdateError,
+    });
+
+    return NextResponse.json(
+      { error: "Could not save booking checkout details." },
+      { status: 500 },
+    );
+  }
 
   return NextResponse.json({ url: session.url, quote });
 };
