@@ -12,13 +12,14 @@ import {
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { isLocale, type Locale } from "@/lib/i18n";
 
-const adminPath = (locale: Locale, search = "") =>
-  `/${locale}/admin/booking-confirmation${search}`;
+const adminPath = (locale: Locale, search = "") => `/${locale}/admin${search}`;
+const blockedDatesPath = (locale: Locale, search = "") =>
+  `/${locale}/admin/blocked-dates${search}`;
 
 const requireAdmin = async (locale: Locale) => {
   const cookieStore = await cookies();
   if (!isValidAdminSession(cookieStore.get(ADMIN_COOKIE_NAME)?.value)) {
-    redirect(adminPath(locale, "?calendar=unauthorized"));
+    redirect(adminPath(locale, "?auth=required"));
   }
 };
 
@@ -42,11 +43,11 @@ export const addBlockedDates = async (formData: FormData) => {
     departure <= arrival ||
     reason.length > 240
   ) {
-    redirect(adminPath(locale, "?calendar=invalid"));
+    redirect(blockedDatesPath(locale, "?calendar=invalid"));
   }
 
   const supabase = getSupabaseAdmin();
-  if (!supabase) redirect(adminPath(locale, "?calendar=unavailable"));
+  if (!supabase) redirect(blockedDatesPath(locale, "?calendar=unavailable"));
 
   const { data: conflicts, error: conflictError } = await supabase
     .from("bookings")
@@ -56,8 +57,8 @@ export const addBlockedDates = async (formData: FormData) => {
     .in("status", ["hold", "confirmed"])
     .limit(1);
 
-  if (conflictError) redirect(adminPath(locale, "?calendar=error"));
-  if (conflicts.length > 0) redirect(adminPath(locale, "?calendar=booking-conflict"));
+  if (conflictError) redirect(blockedDatesPath(locale, "?calendar=error"));
+  if (conflicts.length > 0) redirect(blockedDatesPath(locale, "?calendar=booking-conflict"));
 
   const { error } = await supabase.from("blocked_dates").insert({
     arrival,
@@ -67,11 +68,11 @@ export const addBlockedDates = async (formData: FormData) => {
 
   if (error) {
     const status = error.code === "23P01" ? "block-conflict" : "error";
-    redirect(adminPath(locale, `?calendar=${status}`));
+    redirect(blockedDatesPath(locale, `?calendar=${status}`));
   }
 
-  revalidatePath(adminPath(locale));
-  redirect(adminPath(locale, "?calendar=added"));
+  revalidatePath(blockedDatesPath(locale));
+  redirect(blockedDatesPath(locale, "?calendar=added"));
 };
 
 export const removeBlockedDates = async (formData: FormData) => {
@@ -81,21 +82,20 @@ export const removeBlockedDates = async (formData: FormData) => {
 
   const id = String(formData.get("id") ?? "");
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) {
-    redirect(adminPath(locale, "?calendar=invalid"));
+    redirect(blockedDatesPath(locale, "?calendar=invalid"));
   }
 
   const supabase = getSupabaseAdmin();
-  if (!supabase) redirect(adminPath(locale, "?calendar=unavailable"));
+  if (!supabase) redirect(blockedDatesPath(locale, "?calendar=unavailable"));
 
   const { error } = await supabase.from("blocked_dates").delete().eq("id", id);
-  if (error) redirect(adminPath(locale, "?calendar=error"));
+  if (error) redirect(blockedDatesPath(locale, "?calendar=error"));
 
-  revalidatePath(adminPath(locale));
-  revalidatePath("/api/calendar");
-  redirect(adminPath(locale, "?calendar=removed"));
+  revalidatePath(blockedDatesPath(locale));
+  redirect(blockedDatesPath(locale, "?calendar=removed"));
 };
 
-export const loginToBookingConfirmationAdmin = async (formData: FormData) => {
+export const loginToAdmin = async (formData: FormData) => {
   const rawLocale = String(formData.get("locale") ?? "en");
   const locale: Locale = isLocale(rawLocale) ? rawLocale : "en";
   const password = String(formData.get("password") ?? "");
