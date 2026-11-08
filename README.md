@@ -8,7 +8,6 @@ la Torre, Malaga.
 - Next.js 16 App Router
 - TypeScript
 - Tailwind CSS 4
-- Sanity content hooks
 - Supabase booking schema
 - Stripe deposit checkout
 
@@ -20,9 +19,9 @@ npm run dev
 
 Visit `http://localhost:3000/en`.
 
-Copy `.env.example` to `.env.local` when connecting live Sanity, Supabase and
-Stripe credentials. Without credentials, the booking form runs in demo mode and
-returns a validation message instead of creating a payment session.
+Copy `.env.example` to `.env.local` when connecting live Supabase and Stripe
+credentials. Without credentials, the booking form runs in demo mode and returns
+a validation message instead of creating a payment session.
 
 ## Go-Live Checklist
 
@@ -33,7 +32,7 @@ the production domain is connected.
 
 ### 1. Test the booking flow in Stripe test mode
 
-1. Deploy a preview with the test Stripe, Supabase, Sanity and email
+1. Deploy a preview with the test Stripe, Supabase and email
    environment variables filled in.
 2. Set `NEXT_PUBLIC_SITE_URL` to the preview URL so Stripe returns guests to the
    correct site after Checkout.
@@ -73,7 +72,6 @@ When test payments work end to end:
 1. In Stripe live mode, enable card and Bancontact payment methods.
 2. Replace the preview/test Stripe values with live keys:
    - `STRIPE_SECRET_KEY`
-   - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
 3. Create a live Stripe webhook endpoint:
 
    ```text
@@ -117,18 +115,12 @@ variables:
 - `BOOKINGS_ENABLED=true` to enable real booking holds and Stripe Checkout.
 - `NEXT_PUBLIC_BOOKINGS_REOPEN_LABEL` updated or no longer user-facing.
 - `NEXT_PUBLIC_SITE_URL=https://www.casalasorpresa.com`.
-- production Sanity values:
-  - `NEXT_PUBLIC_SANITY_PROJECT_ID`
-  - `NEXT_PUBLIC_SANITY_DATASET`
-  - `SANITY_API_TOKEN`
 - production Supabase values:
   - `NEXT_PUBLIC_SUPABASE_URL`
-  - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
   - `SUPABASE_SERVICE_ROLE_KEY`
 - production Stripe values:
   - `STRIPE_SECRET_KEY`
   - `STRIPE_WEBHOOK_SECRET`
-  - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
 - production Resend values:
   - `RESEND_API_KEY`
   - `RESEND_FROM_EMAIL`
@@ -146,8 +138,20 @@ Stripe Checkout Session is created.
 
 - `supabase/schema.sql` contains the starter booking, blocked date and event
   tables with RLS enabled.
-- `sanity/schemaTypes.ts` contains starter content schemas for settings,
-  gallery images, rates and amenities.
+
+## Private iPhone Calendar Feed
+
+The read-only feed at `/api/calendar/<token>` includes confirmed bookings and
+owner date blocks. It omits guest names and contact details. Holds and cancelled
+bookings are not included. Calendar changes may take time to appear because
+iPhone Calendar controls subscription refresh timing.
+
+Set `CALENDAR_FEED_TOKEN` in the deployment environment to a long random secret
+(for example, generate one with `openssl rand -hex 32`). The feed URL is
+`https://www.casalasorpresa.com/api/calendar/<that-secret>`. Subscribe to that
+URL from Calendar on each iPhone, or share the URL privately with your partner.
+Treat the URL like a password; regenerate the token to revoke existing access.
+The server also needs the Supabase URL and service role key configured.
 
 ## Scripts
 
