@@ -7,6 +7,8 @@ type CalendarRange = {
   departure: string;
 };
 
+type BookingCalendarEntry = CalendarRange & { guest_name: string };
+
 const escapeIcalText = (value: string) =>
   value
     .replace(/\\/g, "\\\\")
@@ -53,7 +55,7 @@ export async function GET(
   const [bookingsResult, blocksResult] = await Promise.all([
     supabase
       .from("bookings")
-      .select("id, arrival, departure")
+      .select("id, arrival, departure, guest_name")
       .eq("status", "confirmed")
       .order("arrival"),
     supabase
@@ -71,9 +73,15 @@ export async function GET(
   }
 
   const events = [
-    ...(bookingsResult.data as CalendarRange[]).map((booking) =>
-      event(`booking-${booking.id}@casalasorpresa.com`, booking.arrival, booking.departure, "Reserved"),
-    ),
+    ...(bookingsResult.data as BookingCalendarEntry[]).map((booking) => {
+      const firstName = booking.guest_name.trim().split(/\s+/)[0] || "Guest";
+      return event(
+        `booking-${booking.id}@casalasorpresa.com`,
+        booking.arrival,
+        booking.departure,
+        `CLS - ${firstName} booking`,
+      );
+    }),
     ...(blocksResult.data as CalendarRange[]).map((block) =>
       event(`block-${block.id}@casalasorpresa.com`, block.arrival, block.departure, "Unavailable"),
     ),
