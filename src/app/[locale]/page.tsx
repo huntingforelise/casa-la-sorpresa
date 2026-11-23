@@ -9,6 +9,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { BookingForm } from "@/components/BookingForm";
+import { BookingIntro } from "@/components/BookingIntro";
 import { GalleryGrid } from "@/components/GalleryGrid";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -22,7 +23,7 @@ import {
   registrationNumber,
   siteUrl,
 } from "@/data/site";
-import { bookingsEnabled, bookingsPausedMessage } from "@/lib/booking-config";
+import { bookingsEnabled } from "@/lib/booking-config";
 import { isLocale, localizedPath, type Locale } from "@/lib/i18n";
 
 type PageProps = {
@@ -247,9 +248,10 @@ const LocaleHome = async ({ params }: PageProps) => {
             <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
               {t.sections.bookingTitle}
             </h2>
-            <p className="mt-5 max-w-xl text-lg leading-8 text-cream/78">
-              {t.sections.bookingText}
-            </p>
+            <BookingIntro
+              locale={locale}
+              className="mt-5 max-w-xl text-base leading-8 text-cream/78"
+            />
             <div className="mt-8 grid gap-3">
               {t.rateSeasons.map((season) => (
                 <div
@@ -281,7 +283,6 @@ const LocaleHome = async ({ params }: PageProps) => {
             mode="lead"
             variant="compact"
             bookingsEnabled={bookingsEnabled}
-            pausedMessage={bookingsPausedMessage}
           />
         </div>
       </section>

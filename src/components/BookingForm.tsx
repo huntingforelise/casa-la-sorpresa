@@ -24,7 +24,6 @@ type BookingFormProps = {
   variant?: "default" | "compact";
   initialValues?: Partial<Pick<FormState, "arrival" | "departure" | "guests">>;
   bookingsEnabled?: boolean;
-  pausedMessage?: string;
 };
 
 type FormState = {
@@ -72,7 +71,6 @@ export const BookingForm = ({
   variant = "default",
   initialValues,
   bookingsEnabled = true,
-  pausedMessage,
 }: BookingFormProps) => {
   const router = useRouter();
   const localeCopy = copy[locale];
@@ -144,11 +142,6 @@ export const BookingForm = ({
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isLeadMode) {
-      if (!bookingsEnabled) {
-        if (!pausedMessage) setMessage("Bookings are not open yet.");
-        return;
-      }
-
       if (!hasChronologicalDates) {
         setMessage(t.quotePrompt);
         return;
@@ -164,13 +157,10 @@ export const BookingForm = ({
       return;
     }
 
+    if (!bookingsEnabled) return;
+
     if (!quote) {
       setMessage(t.quotePrompt);
-      return;
-    }
-
-    if (!bookingsEnabled) {
-      setMessage(pausedMessage ?? "Bookings are not open yet.");
       return;
     }
 
@@ -227,7 +217,7 @@ export const BookingForm = ({
             className={isLeadMode ? "h-3.5 w-3.5" : "h-4 w-4"}
             aria-hidden="true"
           />
-          {isLeadMode ? t.title : t.fullTitle}
+          {bookingsEnabled ? (isLeadMode ? t.title : t.fullTitle) : t.quoteTitle}
         </p>
         <p
           className={
@@ -305,12 +295,6 @@ export const BookingForm = ({
 
       {isLeadMode ? (
         <>
-          {!bookingsEnabled && pausedMessage ? (
-            <p className="rounded-2xl bg-sun/28 px-4 py-3 text-sm font-semibold leading-6 text-foreground">
-              {pausedMessage}
-            </p>
-          ) : null}
-
           {message ? (
             <p className="rounded-2xl bg-sun/28 px-4 py-3 text-sm font-semibold leading-6 text-foreground">
               {message}
@@ -322,7 +306,7 @@ export const BookingForm = ({
             className="inline-flex h-11 w-full items-center justify-center rounded-full bg-citrus px-5 text-sm font-black text-cream shadow-[0_14px_30px_rgb(241_115_45_/_0.22)] transition hover:-translate-y-0.5 hover:bg-terracotta disabled:cursor-not-allowed disabled:opacity-55 disabled:hover:translate-y-0"
             disabled={!canLeadSubmit}
           >
-            {localeCopy.hero.primary}
+            {bookingsEnabled ? localeCopy.hero.primary : t.estimateAction}
           </button>
         </>
       ) : null}
@@ -335,7 +319,7 @@ export const BookingForm = ({
                 <ReceiptText className="h-4 w-4" aria-hidden="true" />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="font-black">{t.quoteTitle}</p>
+                {bookingsEnabled && <p className="font-black">{t.quoteTitle}</p>}
                 <p className="mt-1 text-sm leading-6 text-muted">
                   {quote ? t.quoteIntro : t.quotePrompt}
                 </p>
@@ -390,85 +374,87 @@ export const BookingForm = ({
                     {money.format(quote.total)}
                   </span>
                 </div>
-                <div className="grid gap-2 rounded-xl border border-pool/24 bg-pool/10 px-3.5 py-3 text-foreground">
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="font-black">{t.depositDue}</span>
-                    <span className="text-lg font-black">
-                      {money.format(quote.deposit)}
-                    </span>
-                  </div>
-                  <p className="flex gap-2 text-sm leading-6 text-pool-deep">
-                    <ShieldCheck
-                      className="mt-1 h-4 w-4 shrink-0"
-                      aria-hidden="true"
-                    />
-                    <span>
-                      {t.refundableUntil} {refundableUntil}.
-                    </span>
-                  </p>
-                </div>
-                <div className="flex items-center justify-between gap-4 rounded-xl border border-border bg-cream/85 px-3.5 py-3 text-foreground">
-                  <span className="font-black">{t.balanceAmount}</span>
-                  <span className="text-lg font-black">
-                    {money.format(quote.total - quote.deposit)}
-                  </span>
-                </div>
-                <p className="text-xs font-semibold leading-5 text-muted">
-                  {t.balanceDue}.
-                </p>
+                {bookingsEnabled && (
+                  <>
+                    <div className="grid gap-2 rounded-xl border border-pool/24 bg-pool/10 px-3.5 py-3 text-foreground">
+                      <div className="flex items-center justify-between gap-4">
+                        <span className="font-black">{t.depositDue}</span>
+                        <span className="text-lg font-black">
+                          {money.format(quote.deposit)}
+                        </span>
+                      </div>
+                      <p className="flex gap-2 text-sm leading-6 text-pool-deep">
+                        <ShieldCheck
+                          className="mt-1 h-4 w-4 shrink-0"
+                          aria-hidden="true"
+                        />
+                        <span>
+                          {t.refundableUntil} {refundableUntil}.
+                        </span>
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-between gap-4 rounded-xl border border-border bg-cream/85 px-3.5 py-3 text-foreground">
+                      <span className="font-black">{t.balanceAmount}</span>
+                      <span className="text-lg font-black">
+                        {money.format(quote.total - quote.deposit)}
+                      </span>
+                    </div>
+                    <p className="text-xs font-semibold leading-5 text-muted">
+                      {t.balanceDue}.
+                    </p>
+                  </>
+                )}
               </div>
             ) : null}
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <label className="grid gap-1.5 text-sm font-bold">
-              {t.name}
-              <input
-                required
-                value={form.name}
-                onChange={(event) => update("name", event.target.value)}
-                className={fieldClass[variant]}
-              />
-            </label>
+          {bookingsEnabled && (
+            <>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <label className="grid gap-1.5 text-sm font-bold">
+                  {t.name}
+                  <input
+                    required
+                    value={form.name}
+                    onChange={(event) => update("name", event.target.value)}
+                    className={fieldClass[variant]}
+                  />
+                </label>
 
-            <label className="grid gap-1.5 text-sm font-bold">
-              {t.email}
-              <input
-                required
-                type="email"
-                value={form.email}
-                onChange={(event) => update("email", event.target.value)}
-                className={fieldClass[variant]}
-              />
-            </label>
-          </div>
+                <label className="grid gap-1.5 text-sm font-bold">
+                  {t.email}
+                  <input
+                    required
+                    type="email"
+                    value={form.email}
+                    onChange={(event) => update("email", event.target.value)}
+                    className={fieldClass[variant]}
+                  />
+                </label>
+              </div>
 
-          <label className="grid gap-1.5 text-sm font-bold">
-            {t.notes}
-            <textarea
-              value={form.notes}
-              onChange={(event) => update("notes", event.target.value)}
-              rows={isCompact ? 3 : 4}
-              className={`${fieldClass[variant]} resize-none`}
-            />
-          </label>
+              <label className="grid gap-1.5 text-sm font-bold">
+                {t.notes}
+                <textarea
+                  value={form.notes}
+                  onChange={(event) => update("notes", event.target.value)}
+                  rows={isCompact ? 3 : 4}
+                  className={`${fieldClass[variant]} resize-none`}
+                />
+              </label>
 
-          <button
-            type="submit"
-            className="cta-primary w-full disabled:cursor-not-allowed disabled:opacity-55 disabled:hover:translate-y-0"
-            disabled={!canSubmit}
-          >
-            {isSubmitting ? (
-              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
-            ) : null}
-            {t.submit}
-          </button>
-
-          {!bookingsEnabled && pausedMessage ? (
-            <p className="rounded-2xl bg-sun/28 px-4 py-3 text-sm font-semibold leading-6 text-foreground">
-              {pausedMessage}
-            </p>
-          ) : null}
+              <button
+                type="submit"
+                className="cta-primary w-full disabled:cursor-not-allowed disabled:opacity-55 disabled:hover:translate-y-0"
+                disabled={!canSubmit}
+              >
+                {isSubmitting ? (
+                  <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                ) : null}
+                {t.submit}
+              </button>
+            </>
+          )}
 
           {message ? (
             <p className="rounded-2xl bg-sun/28 px-4 py-3 text-sm font-semibold leading-6 text-foreground">

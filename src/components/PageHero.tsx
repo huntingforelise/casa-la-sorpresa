@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
 import { copy, heroImage } from "@/data/site";
+import { bookingsEnabled } from "@/lib/booking-config";
 import { localizedPath, type Locale } from "@/lib/i18n";
 import { OrganicShapes } from "./OrganicShapes";
 
@@ -28,7 +29,7 @@ export const PageHero = ({ locale }: { locale: Locale }) => {
               href={localizedPath(locale, "/booking")}
               className="cta-primary"
             >
-              {t.hero.primary}
+              {bookingsEnabled ? t.hero.primary : t.booking.estimateAction}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link

@@ -63,6 +63,8 @@ export type PageCopy = {
   booking: {
     title: string;
     fullTitle: string;
+    emailBookingText: [beforeEmail: string, afterEmail: string];
+    estimateAction: string;
     intro: string;
     arrival: string;
     departure: string;
@@ -176,8 +178,8 @@ export const stayDiscounts = [
 ];
 
 export const contact = {
-  email: "elise@elisebuilds.com",
-  phone: "+34 000 000 000",
+  email: "info@casalasorpresa.com",
+  phone: "+34 614 25 11 80",
   location: "Pinos de Alhaurin, Malaga, Spain",
   mapQuery:
     "Casa La Sorpresa, Pinos de Alhaurin, Alhaurin de la Torre, Malaga, Spain",
@@ -526,6 +528,11 @@ export const copy: Record<Locale, PageCopy> = {
     booking: {
       title: "Start a booking",
       fullTitle: "Make a booking",
+      emailBookingText: [
+        "Bookings are open by email. Online booking isn’t available yet. Send your preferred dates and guest count to ",
+        ".",
+      ],
+      estimateAction: "See estimated price",
       intro:
         "Choose dates and guests. Stays start at 5 nights, prices at 2 guests.",
       arrival: "Arrival",
@@ -539,7 +546,7 @@ export const copy: Record<Locale, PageCopy> = {
       quoteTitle: "Your stay price",
       quoteIntro: "This estimate updates from your dates and guest count.",
       quotePrompt:
-        "Choose arrival and departure dates to see the price before you continue.",
+        "Choose arrival and departure dates to see the estimated price.",
       minimumStayWarning:
         "Minimum stay: {minimum} nights. Your selected stay: {selected} nights.",
       nights: "Nights",
@@ -769,6 +776,11 @@ export const copy: Record<Locale, PageCopy> = {
     booking: {
       title: "Start je boeking",
       fullTitle: "Maak een boeking",
+      emailBookingText: [
+        "Je kunt nu boeken via e-mail. Boeken via de website is nog niet mogelijk. Stuur je gewenste data en het aantal gasten naar ",
+        ".",
+      ],
+      estimateAction: "Bekijk de richtprijs",
       intro:
         "Kies data en gasten. Verblijven starten vanaf 5 nachten, prijzen op basis van 2 gasten.",
       arrival: "Aankomst",
@@ -782,7 +794,7 @@ export const copy: Record<Locale, PageCopy> = {
       quoteTitle: "Prijs van je verblijf",
       quoteIntro: "Deze schatting past zich aan je data en aantal gasten aan.",
       quotePrompt:
-        "Kies aankomst- en vertrekdata om de prijs te zien voor je doorgaat.",
+        "Kies je aankomst- en vertrekdatum om de richtprijs te zien.",
       minimumStayWarning:
         "Minimumverblijf: {minimum} nachten. Je gekozen verblijf: {selected} nachten.",
       nights: "Nachten",
@@ -1109,6 +1121,11 @@ export const copy: Record<Locale, PageCopy> = {
     booking: {
       title: "Iniciar reserva",
       fullTitle: "Haz una reserva",
+      emailBookingText: [
+        "Ya puedes reservar por correo electrónico. Las reservas a través de la web aún no están disponibles. Envía tus fechas preferidas y el número de huéspedes a ",
+        ".",
+      ],
+      estimateAction: "Ver precio estimado",
       intro:
         "Elige fechas y huespedes. Las estancias empiezan en 5 noches, precios para 2 huespedes.",
       arrival: "Llegada",
@@ -1122,7 +1139,7 @@ export const copy: Record<Locale, PageCopy> = {
       quoteTitle: "Precio de tu estancia",
       quoteIntro: "Esta estimacion se actualiza con tus fechas y huespedes.",
       quotePrompt:
-        "Elige llegada y salida para ver el precio antes de continuar.",
+        "Elige las fechas de llegada y salida para ver el precio estimado.",
       minimumStayWarning:
         "Estancia minima: {minimum} noches. Estancia elegida: {selected} noches.",
       nights: "Noches",
@@ -1420,7 +1437,7 @@ export const pageMeta: Record<
     booking: {
       title: "Booking",
       description:
-        "Check dates and reserve Casa la Sorpresa with a secure deposit flow.",
+        "See rates and find out how to book your stay at Casa la Sorpresa.",
     },
     contact: {
       title: "Contact",
@@ -1448,7 +1465,7 @@ export const pageMeta: Record<
     },
     booking: {
       title: "Boeken",
-      description: "Controleer data en reserveer met aanbetaling.",
+      description: "Bekijk de tarieven en ontdek hoe je je verblijf boekt.",
     },
     contact: {
       title: "Contact",
@@ -1475,7 +1492,7 @@ export const pageMeta: Record<
     },
     booking: {
       title: "Reservar",
-      description: "Consulta fechas y reserva con deposito.",
+      description: "Consulta las tarifas y descubre cómo reservar tu estancia.",
     },
     contact: {
       title: "Contacto",

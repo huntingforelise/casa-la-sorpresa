@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { CheckCircle2, Info } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { BookingForm } from "@/components/BookingForm";
+import { BookingIntro } from "@/components/BookingIntro";
 import { copy, pageMeta } from "@/data/site";
-import { bookingsEnabled, bookingsPausedMessage } from "@/lib/booking-config";
+import { bookingsEnabled } from "@/lib/booking-config";
 import { isLocale, type Locale } from "@/lib/i18n";
 
 type PageProps = {
@@ -39,9 +40,10 @@ const BookingPage = async ({ params, searchParams }: PageProps) => {
           <h1 className="mt-3 text-5xl font-black leading-tight">
             {t.sections.bookingTitle}
           </h1>
-          <p className="mt-5 leading-8 text-cream/78">
-            {t.sections.bookingText}
-          </p>
+          <BookingIntro
+            locale={locale}
+            className="mt-5 leading-8 text-cream/78"
+          />
           <div className="mt-8 grid gap-3 xl:grid-cols-[0.9fr_1.1fr]">
             <div className="rounded-3xl border border-cream/14 bg-cream/10 px-5 py-4">
               <p className="font-black">{t.bookingSummary.title}</p>
@@ -77,22 +79,6 @@ const BookingPage = async ({ params, searchParams }: PageProps) => {
           </div>
         </div>
         <div className="w-full max-w-xl lg:justify-self-end">
-          {!bookingsEnabled ? (
-            <div className="mb-5 rounded-[1.7rem] border border-sun/35 bg-cream px-5 py-5 text-foreground shadow-[0_20px_54px_rgba(255,211,78,0.18)]">
-              <div className="flex items-start gap-3">
-                <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-full bg-sun text-foreground">
-                  <Info className="h-5 w-5" aria-hidden="true" />
-                </span>
-                <div>
-                  <p className="text-xl font-black">Bookings are paused</p>
-                  <p className="mt-1 text-sm font-semibold leading-6 text-muted">
-                    {bookingsPausedMessage} You can still explore prices and
-                    stay details, but deposits are not available yet.
-                  </p>
-                </div>
-              </div>
-            </div>
-          ) : null}
           {bookingStatus === "success" ? (
             <div className="mb-5 rounded-[1.7rem] border border-sun/45 bg-sun px-5 py-5 text-foreground shadow-[0_20px_54px_rgba(255,211,78,0.22)]">
               <div className="flex items-start gap-3">
@@ -116,7 +102,6 @@ const BookingPage = async ({ params, searchParams }: PageProps) => {
               guests: firstSearchValue(query.guests),
             }}
             bookingsEnabled={bookingsEnabled}
-            pausedMessage={bookingsPausedMessage}
           />
         </div>
       </div>

@@ -113,7 +113,6 @@ Before taking real deposits, set or confirm these production environment
 variables:
 
 - `BOOKINGS_ENABLED=true` to enable real booking holds and Stripe Checkout.
-- `NEXT_PUBLIC_BOOKINGS_REOPEN_LABEL` updated or no longer user-facing.
 - `NEXT_PUBLIC_SITE_URL=https://www.casalasorpresa.com`.
 - production Supabase values:
   - `NEXT_PUBLIC_SUPABASE_URL`
